@@ -53,7 +53,7 @@ public class Application extends SpringBootServletInitializer {
             while (rs.next()){
                 rsStr +="{";
                 rsStr += rs.getInt("id")+",";
-                rsStr += rs.getInt("type_id")+",";
+                rsStr += rs.getString("type")+",";
                 rsStr += rs.getString("title")+",";
                 rsStr += rs.getString("main")+",";
                 rsStr += rs.getInt("view_count")+",";
