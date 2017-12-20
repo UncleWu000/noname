@@ -2,11 +2,11 @@ package com.noname.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.noname.entity.Article;
-import com.noname.entity.Result;
 import com.noname.mapper.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RequestMapping("/article")
@@ -22,18 +22,15 @@ public class ArticleController {
 //    ArticleService articleService;
 
 
+    //根据ID读取
     @GetMapping("/{id}")
-    public  Result<Article> getArticleById(@PathVariable("id") Integer id){
-
-        Article article = articleMapper.selectByPrimaryKey(id);
-        Result<Article> rs = new Result<>();
-        rs.setData(article);
-        return rs;
+    public  Article getArticleById(@PathVariable("id") Integer id){
+        return articleMapper.selectByPrimaryKey(id);
     }
 
     //读取文章列表
     @GetMapping("/list")
-    public Result<List<Article>> getList(Integer pageNum, Integer pageSize){
+    public List<Article> getList(Integer pageNum, Integer pageSize){
 
         if(pageNum!=null && pageSize!=null)
            PageHelper.startPage(pageNum, pageSize);
@@ -41,25 +38,21 @@ public class ArticleController {
         System.out.println(pageNum +" "+ pageSize);
 
         List<Article> ret = articleMapper.selectAll();
-
-        Result<List<Article>> rs = new Result<>();
-        rs.setData(ret);
-        return rs;
+        Collections.reverse(ret);
+        return ret;
     }
 
     @DeleteMapping("/{id}")
-    public Result<String> deleteArticle(@PathVariable("id")Integer id){
-        articleMapper.deleteByPrimaryKey(id);
-        return  new Result<>();
+    public int deleteArticle(@PathVariable("id")Integer id){
+        return articleMapper.deleteByPrimaryKey(id);
+
     }
 
     @PutMapping("/update")
-    public  Result<String> updateArticle(Article article){
+    public  int updateArticle(Article article){
 
-        if(articleMapper.updateByPrimaryKey(article) == 1){
-            return new Result<>();
-        }
-        return new Result<>();
+        return articleMapper.updateByPrimaryKey(article);
+
     }
 
 

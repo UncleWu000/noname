@@ -1,5 +1,118 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.noname.mapper.ArticleMapper" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.noname.mapper.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.noname.entity.Article">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="view_count" jdbcType="INTEGER" property="viewCount" />
+    <result column="like_count" jdbcType="INTEGER" property="likeCount" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="main" jdbcType="VARCHAR" property="main" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type_id, title, view_count, like_count, create_date, main
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from article
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from article
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.noname.entity.Article">
+    insert into article (id, type_id, title, 
+      view_count, like_count, create_date, 
+      main)
+    values (#{id,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{viewCount,jdbcType=INTEGER}, #{likeCount,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{main,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.noname.entity.Article">
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="viewCount != null">
+        view_count,
+      </if>
+      <if test="likeCount != null">
+        like_count,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="main != null">
+        main,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="viewCount != null">
+        #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null">
+        #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="main != null">
+        #{main,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.noname.entity.Article">
+    update article
+    <set>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="viewCount != null">
+        view_count = #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null">
+        like_count = #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="main != null">
+        main = #{main,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.noname.entity.Article">
+    update article
+    set type_id = #{typeId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      view_count = #{viewCount,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      main = #{main,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 
 </mapper>

@@ -24,6 +24,9 @@ public class Application extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+
+        System.out.println(new Date(1482904713000l));
+        System.out.println(new Date(1482904713l));
         return builder.sources(Application.class);
     }
 

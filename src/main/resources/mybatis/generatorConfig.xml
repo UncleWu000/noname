@@ -47,6 +47,11 @@
                enableDeleteByExample="false"
                 enableSelectByExample="false"
                 enableUpdateByExample="false"></table>
+        <table tableName="manager"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"></table>
 
     </context>
 </generatorConfiguration>
