@@ -42,12 +42,12 @@
         </javaClientGenerator>
 
         <!-- 指定数据库表，要生成哪些表，就写哪些表，要和数据库中对应，不能写错！ -->
-        <table tableName="article"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-                enableSelectByExample="false"
-                enableUpdateByExample="false"></table>
-        <table tableName="manager"
+        <!--<table tableName="article"-->
+               <!--enableCountByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+                <!--enableSelectByExample="false"-->
+                <!--enableUpdateByExample="false"></table>-->
+        <table tableName="admin"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
