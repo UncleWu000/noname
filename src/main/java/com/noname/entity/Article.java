@@ -5,7 +5,7 @@ import java.util.Date;
 public class Article {
     private Integer id;
 
-    private Integer typeId;
+    private String type;
 
     private String title;
 
@@ -25,12 +25,12 @@ public class Article {
         this.id = id;
     }
 
-    public Integer getTypeId() {
-        return typeId;
+    public String getType() {
+        return type;
     }
 
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getTitle() {
