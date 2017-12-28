@@ -1,12 +1,16 @@
 package com.noname.controller;
 
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
+import com.noname.annotation.Pagination;
 import com.noname.entity.Article;
+import com.noname.exception.UtilException;
 import com.noname.mapper.ArticleMapper;
+import com.noname.util.VOUtils;
+import com.noname.vo.ArticleVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,14 +55,10 @@ public class ArticleController {
 
     //读取文章列表
     @GetMapping("/list/{rule}")
-    public Map<String, Object> getList2(@PathVariable(required = false, value = "rule")String rule, Integer pageNum, Integer pageSize){
+    @Pagination
+    public Map<String, Object> getList2(@PathVariable(required = false, value = "rule")String rule){
 
         Map<String, Object> map = new HashMap<>();
-        if(pageNum ==null || pageSize==null){
-            pageNum = 1;
-            pageSize = 10;
-        }
-        PageHelper.startPage(pageNum, pageSize);
 
         if(rule.equals("likeasc")){
             rule = "ORDER BY like_count ASC";
@@ -78,12 +78,23 @@ public class ArticleController {
         }else{
             rule = "ORDER BY create_date DESC";
         }
-        map.put("pageNum", pageNum);
-        map.put("pageSize", pageSize);
+
         List<Article> ret = articleMapper.selectAllByRule(rule);
         Page<Article> page = (Page)ret;
+        map.put("pageNum", page.getPageNum());
+        map.put("pageSize", page.getPageSize());
         map.put("total", page.getTotal());
-        map.put("data", ret);
+        List<ArticleVO> avos = new ArrayList<>();
+        try {
+            VOUtils.entityListToVoList(ret, avos, ArticleVO.class);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (UtilException e) {
+            e.printStackTrace();
+        }
+        map.put("data", avos);
 
         return map;
     }

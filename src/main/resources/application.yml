@@ -16,6 +16,9 @@ spring:
             allow: true
           max-active: 10
           min-idle: 1
+    mvc:
+      view:
+        prefix:
 
 mybatis:
     type-aliases-package: com.noname.entity
