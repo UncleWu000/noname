@@ -25,11 +25,11 @@ mybatis:
     mapper-locations: classpath:mybatis/xml/*.xml
 
 ## 如果自定义一个mapper继承tk的mapper (mapper和@mapper冲突问题) 则需要配置
-#mapper:
-#    mappers:
-#        - com.noname.mapper.BaseMapper
-#    not-empty: true
-#    identity: MYSQL
+mapper:
+    mappers:
+        - com.noname.util.BaseMapper
+    not-empty: false
+    identity: MYSQL
 
 #pagehelper
 pagehelper:

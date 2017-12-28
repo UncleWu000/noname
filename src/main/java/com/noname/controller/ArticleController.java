@@ -3,10 +3,10 @@ package com.noname.controller;
 import com.github.pagehelper.Page;
 import com.noname.annotation.Pagination;
 import com.noname.entity.Article;
-import com.noname.exception.UtilException;
 import com.noname.mapper.ArticleMapper;
-import com.noname.util.VOUtils;
+import com.noname.mapper.ArticleMapper2;
 import com.noname.vo.ArticleVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +23,9 @@ public class ArticleController {
 
     @Autowired
     ArticleMapper articleMapper;
+
+    @Autowired
+    ArticleMapper2 articleMapper2;
 
 //    @Autowired
 //    ArticleService articleService;
@@ -79,21 +82,21 @@ public class ArticleController {
             rule = "ORDER BY create_date DESC";
         }
 
-        List<Article> ret = articleMapper.selectAllByRule(rule);
+//        List<Article> ret = articleMapper.selectAllByRule(rule);
+        List<Article> ret = articleMapper2.selectAll();
+
         Page<Article> page = (Page)ret;
         map.put("pageNum", page.getPageNum());
         map.put("pageSize", page.getPageSize());
         map.put("total", page.getTotal());
         List<ArticleVO> avos = new ArrayList<>();
-        try {
-            VOUtils.entityListToVoList(ret, avos, ArticleVO.class);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (UtilException e) {
-            e.printStackTrace();
+
+        for(Article item : ret){
+            ArticleVO avo = new ArticleVO();
+            BeanUtils.copyProperties(item, avo);
+            avos.add(avo);
         }
+
         map.put("data", avos);
 
         return map;

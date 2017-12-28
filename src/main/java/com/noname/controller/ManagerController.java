@@ -16,17 +16,17 @@ public class ManagerController {
     @Autowired
     AdminMapper adminMapper;
 
-    @PostMapping("/add")
+    @PostMapping("")
     public int addAdmin(Admin admin){
         return adminMapper.insertSelective(admin);
     }
 
-    @DeleteMapping("/del/{id}")
+    @DeleteMapping("/{id}")
     public int delAdmin(@PathVariable("id")Integer id){
         return adminMapper.deleteByPrimaryKey(id);
     }
 
-    @PutMapping("/msgModify")
+    @PutMapping("")
     public int pwChange(Admin admin){
         return adminMapper.updateByPrimaryKey(admin);
     }
@@ -36,7 +36,7 @@ public class ManagerController {
         return adminMapper.selectAll();
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public Admin getAdminById(@PathVariable("id")Integer id){
         return adminMapper.selectByPrimaryKey(id);
     }

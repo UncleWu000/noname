@@ -11,4 +11,9 @@ public class ArticleVO extends Article {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

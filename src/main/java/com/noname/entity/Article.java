@@ -1,5 +1,7 @@
 package com.noname.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 public class Article {
@@ -13,6 +15,7 @@ public class Article {
 
     private Integer likeCount;
 
+    @JsonIgnore
     private Date createDate;
 
     private String main;
@@ -71,5 +74,18 @@ public class Article {
 
     public void setMain(String main) {
         this.main = main;
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", title='" + title + '\'' +
+                ", viewCount=" + viewCount +
+                ", likeCount=" + likeCount +
+                ", createDate=" + createDate +
+                ", main='" + main + '\'' +
+                '}';
     }
 }
