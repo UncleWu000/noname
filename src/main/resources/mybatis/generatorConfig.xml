@@ -42,17 +42,57 @@
         </javaClientGenerator>
 
         <!-- 指定数据库表，要生成哪些表，就写哪些表，要和数据库中对应，不能写错！ -->
-        <table tableName="article"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-                enableSelectByExample="false"
-                enableUpdateByExample="false"></table>
+        <!--<table tableName="article"-->
+               <!--enableCountByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+                <!--enableSelectByExample="false"-->
+                <!--enableUpdateByExample="false"></table>-->
 
-        <table tableName="admin"
+        <!--<table tableName="admin"-->
+               <!--enableCountByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false"></table>-->
+
+        <table tableName="user"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
-               enableUpdateByExample="false"></table>
+               enableUpdateByExample="false">
+            <!--<columnRenamingRule searchString="^.*_\B" replaceString="" />-->
+        </table>
+
+        <table tableName="role"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <!--<columnRenamingRule searchString="^.*_\B" replaceString="" />-->
+        </table>
+
+        <table tableName="permission"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <!--<columnRenamingRule searchString="^.*_\B" replaceString="" />-->
+        </table>
+
+        <table tableName="role_permission"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <!--<columnRenamingRule searchString="^.*_\B" replaceString="" />-->
+        </table>
+
+        <table tableName="user_role"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <!--<columnRenamingRule searchString="^.*_\B" replaceString="" />-->
+        </table>
 
 
 

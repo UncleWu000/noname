@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="noname@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.3">
+    <root id="1"/>
+    <schema id="2" parent="1" name="noname">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <schema id="6" parent="1" name="test"/>
+    <table id="7" parent="2" name="admin"/>
+    <table id="8" parent="2" name="article"/>
+    <table id="9" parent="2" name="permission"/>
+    <table id="10" parent="2" name="role"/>
+    <table id="11" parent="2" name="role_permission"/>
+    <table id="12" parent="2" name="user"/>
+    <table id="13" parent="2" name="user_role"/>
+    <column id="14" parent="7" name="id">
+      <Position>1</Position>
+      <DataType>int(255)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="15" parent="7" name="username">
+      <Position>2</Position>
+      <DataType>varchar(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="16" parent="7" name="password">
+      <Position>3</Position>
+      <DataType>varchar(16)|0</DataType>
+    </column>
+    <key id="17" parent="7" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="18" parent="8" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="19" parent="8" name="type">
+      <Position>2</Position>
+      <Comment>分类id</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="20" parent="8" name="title">
+      <Position>3</Position>
+      <Comment>标题</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="21" parent="8" name="view_count">
+      <Position>4</Position>
+      <Comment>浏览次数</Comment>
+      <DataType>int(255)|0</DataType>
+    </column>
+    <column id="22" parent="8" name="like_count">
+      <Position>5</Position>
+      <Comment>点赞次数</Comment>
+      <DataType>int(255)|0</DataType>
+    </column>
+    <column id="23" parent="8" name="create_date">
+      <Position>6</Position>
+      <Comment>发布时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="24" parent="8" name="main">
+      <Position>7</Position>
+      <Comment>信息主体</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="25" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="26" parent="9" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="27" parent="9" name="url">
+      <Position>2</Position>
+      <Comment>url地址</Comment>
+      <DataType>varchar(256)|0</DataType>
+    </column>
+    <column id="28" parent="9" name="name">
+      <Position>3</Position>
+      <Comment>url描述</Comment>
+      <DataType>varchar(64)|0</DataType>
+    </column>
+    <key id="29" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="30" parent="10" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="31" parent="10" name="name">
+      <Position>2</Position>
+      <Comment>角色名称</Comment>
+      <DataType>varchar(32)|0</DataType>
+    </column>
+    <column id="32" parent="10" name="type">
+      <Position>3</Position>
+      <Comment>角色类型</Comment>
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <key id="33" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="34" parent="11" name="rid">
+      <Position>1</Position>
+      <Comment>角色ID</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="35" parent="11" name="pid">
+      <Position>2</Position>
+      <Comment>权限ID</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="36" parent="12" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="37" parent="12" name="nickname">
+      <Position>2</Position>
+      <Comment>用户昵称</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="38" parent="12" name="email">
+      <Position>3</Position>
+      <Comment>邮箱|登录帐号</Comment>
+      <DataType>varchar(128)|0</DataType>
+    </column>
+    <column id="39" parent="12" name="pswd">
+      <Position>4</Position>
+      <Comment>密码</Comment>
+      <DataType>varchar(32)|0</DataType>
+    </column>
+    <column id="40" parent="12" name="create_time">
+      <Position>5</Position>
+      <Comment>创建时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="41" parent="12" name="last_login_time">
+      <Position>6</Position>
+      <Comment>最后登录时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="42" parent="12" name="status">
+      <Position>7</Position>
+      <Comment>1:有效，0:禁止登录</Comment>
+      <DataType>bigint(1)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <key id="43" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="44" parent="13" name="uid">
+      <Position>1</Position>
+      <Comment>用户ID</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="45" parent="13" name="rid">
+      <Position>2</Position>
+      <Comment>角色ID</Comment>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+  </database-model>
+</dataSource>

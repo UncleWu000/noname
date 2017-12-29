@@ -60,7 +60,6 @@ public class ArticleController {
     @GetMapping("/list/{rule}")
     @Pagination
     public Map<String, Object> getList2(@PathVariable(required = false, value = "rule")String rule){
-
         Map<String, Object> map = new HashMap<>();
 
         if(rule.equals("likeasc")){
