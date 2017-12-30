@@ -72,4 +72,17 @@ public class User {
     public void setStatus(Long status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", nickname='" + nickname + '\'' +
+                ", email='" + email + '\'' +
+                ", pswd='" + pswd + '\'' +
+                ", createTime=" + createTime +
+                ", lastLoginTime=" + lastLoginTime +
+                ", status=" + status +
+                '}';
+    }
 }

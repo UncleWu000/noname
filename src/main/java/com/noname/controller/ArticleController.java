@@ -97,7 +97,6 @@ public class ArticleController {
         }
 
         map.put("data", avos);
-
         return map;
     }
 
