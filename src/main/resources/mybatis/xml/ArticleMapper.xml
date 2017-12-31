@@ -10,110 +10,6 @@
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="main" property="main" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    id, type, title, view_count, like_count, create_date, main
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from article
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from article
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.noname.entity.Article" >
-    insert into article (id, type, title, 
-      view_count, like_count, create_date, 
-      main)
-    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{viewCount,jdbcType=INTEGER}, #{likeCount,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{main,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.noname.entity.Article" >
-    insert into article
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="type != null" >
-        type,
-      </if>
-      <if test="title != null" >
-        title,
-      </if>
-      <if test="viewCount != null" >
-        view_count,
-      </if>
-      <if test="likeCount != null" >
-        like_count,
-      </if>
-      <if test="createDate != null" >
-        create_date,
-      </if>
-      <if test="main != null" >
-        main,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="type != null" >
-        #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="viewCount != null" >
-        #{viewCount,jdbcType=INTEGER},
-      </if>
-      <if test="likeCount != null" >
-        #{likeCount,jdbcType=INTEGER},
-      </if>
-      <if test="createDate != null" >
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="main != null" >
-        #{main,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.noname.entity.Article" >
-    update article
-    <set >
-      <if test="type != null" >
-        type = #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="viewCount != null" >
-        view_count = #{viewCount,jdbcType=INTEGER},
-      </if>
-      <if test="likeCount != null" >
-        like_count = #{likeCount,jdbcType=INTEGER},
-      </if>
-      <if test="createDate != null" >
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="main != null" >
-        main = #{main,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.noname.entity.Article" >
-    update article
-    set type = #{type,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
-      view_count = #{viewCount,jdbcType=INTEGER},
-      like_count = #{likeCount,jdbcType=INTEGER},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      main = #{main,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
 
   <select id="selectAllByRule" resultMap="BaseResultMap">
     SELECT * FROM article
@@ -122,5 +18,4 @@
     </if>
   </select>
 
-  <select id="select" resultMap="BaseResultMap"></select>
 </mapper>

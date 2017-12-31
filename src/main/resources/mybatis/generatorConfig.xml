@@ -29,7 +29,7 @@
         </javaModelGenerator>
 
         <!-- targetProject:mapper映射xml文件生成的位置，重要！！ -->
-        <sqlMapGenerator targetPackage="com.noname.mapper.xml"
+        <sqlMapGenerator targetPackage="mybatis.xml"
                          targetProject=".\src\main\java">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>

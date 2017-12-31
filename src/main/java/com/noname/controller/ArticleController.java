@@ -24,6 +24,10 @@ public class ArticleController {
     ArticleMapper articleMapper;
 
 
+//    @Autowired
+//    ArticleService articleService;
+
+
     //根据ID读取
     @GetMapping("/{id}")
     public  Article getArticleById(@PathVariable("id") Integer id){

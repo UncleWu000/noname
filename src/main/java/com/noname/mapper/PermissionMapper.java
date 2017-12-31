@@ -1,8 +1,10 @@
 package com.noname.mapper;
 
 import com.noname.entity.Permission;
-import tk.mybatis.mapper.common.Mapper;
+import com.noname.util.BaseMapper;
 
-public interface PermissionMapper extends Mapper<Permission> {
+
+public interface PermissionMapper extends BaseMapper<Permission> {
+
 
 }
