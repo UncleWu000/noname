@@ -48,51 +48,51 @@
                 <!--enableSelectByExample="false"-->
                 <!--enableUpdateByExample="false"></table>-->
 
-        <!--<table tableName="admin"-->
+        <table tableName="manager"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"></table>
+
+        <!--<table tableName="user"-->
                <!--enableCountByExample="false"-->
                <!--enableDeleteByExample="false"-->
                <!--enableSelectByExample="false"-->
-               <!--enableUpdateByExample="false"></table>-->
+               <!--enableUpdateByExample="false">-->
+            <!--&lt;!&ndash;<columnRenamingRule searchString="^.*_\B" replaceString="" />&ndash;&gt;-->
+        <!--</table>-->
 
-        <table tableName="user"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <!--<columnRenamingRule searchString="^.*_\B" replaceString="" />-->
-        </table>
+        <!--<table tableName="role"-->
+               <!--enableCountByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--&lt;!&ndash;<columnRenamingRule searchString="^.*_\B" replaceString="" />&ndash;&gt;-->
+        <!--</table>-->
 
-        <table tableName="role"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <!--<columnRenamingRule searchString="^.*_\B" replaceString="" />-->
-        </table>
+        <!--<table tableName="permission"-->
+               <!--enableCountByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--&lt;!&ndash;<columnRenamingRule searchString="^.*_\B" replaceString="" />&ndash;&gt;-->
+        <!--</table>-->
 
-        <table tableName="permission"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <!--<columnRenamingRule searchString="^.*_\B" replaceString="" />-->
-        </table>
+        <!--<table tableName="role_permission"-->
+               <!--enableCountByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--&lt;!&ndash;<columnRenamingRule searchString="^.*_\B" replaceString="" />&ndash;&gt;-->
+        <!--</table>-->
 
-        <table tableName="role_permission"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <!--<columnRenamingRule searchString="^.*_\B" replaceString="" />-->
-        </table>
-
-        <table tableName="user_role"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               enableUpdateByExample="false">
-            <!--<columnRenamingRule searchString="^.*_\B" replaceString="" />-->
-        </table>
+        <!--<table tableName="user_role"-->
+               <!--enableCountByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--&lt;!&ndash;<columnRenamingRule searchString="^.*_\B" replaceString="" />&ndash;&gt;-->
+        <!--</table>-->
 
 
 

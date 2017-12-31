@@ -1,8 +1,5 @@
 package com.noname.controller;
 
-import com.noname.entity.Admin;
-import com.noname.mapper.AdminMapper;
-import com.noname.shiro.ShiroRealm;
 import com.noname.util.EncrypUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -20,20 +17,6 @@ import java.util.Map;
 @RestController
 public class LoginController {
 
-    @Resource
-    AdminMapper adminMapper;
-
-    @RequestMapping("/login")
-    public String login(Admin admin) throws Exception{
-
-        List<Admin> adminList = adminMapper.select(admin);
-        if(adminList.size()>0){
-            admin = adminList.get(0);
-            return EncrypUtils.encryp(admin.getUsername(), admin.getPassword());
-        }else{
-            return "账号或密码错误!";
-        }
-    }
 
     @RequestMapping("/myLogin")
     @ResponseBody

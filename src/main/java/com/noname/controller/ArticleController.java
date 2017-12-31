@@ -4,7 +4,6 @@ import com.github.pagehelper.Page;
 import com.noname.annotation.Pagination;
 import com.noname.entity.Article;
 import com.noname.mapper.ArticleMapper;
-import com.noname.mapper.ArticleMapper2;
 import com.noname.vo.ArticleVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +22,6 @@ public class ArticleController {
 
     @Autowired
     ArticleMapper articleMapper;
-
-    @Autowired
-    ArticleMapper2 articleMapper2;
-
-//    @Autowired
-//    ArticleService articleService;
 
 
     //根据ID读取
@@ -60,6 +53,7 @@ public class ArticleController {
     @GetMapping("/list/{rule}")
     @Pagination
     public Map<String, Object> getList2(@PathVariable(required = false, value = "rule")String rule){
+        System.out.println("获取文章列表...");
         Map<String, Object> map = new HashMap<>();
 
         if(rule.equals("likeasc")){
@@ -82,7 +76,7 @@ public class ArticleController {
         }
 
 //        List<Article> ret = articleMapper.selectAllByRule(rule);
-        List<Article> ret = articleMapper2.selectAll();
+        List<Article> ret = articleMapper.selectAll();
 
         Page<Article> page = (Page)ret;
         map.put("pageNum", page.getPageNum());
@@ -112,7 +106,6 @@ public class ArticleController {
         return articleMapper.updateByPrimaryKey(article);
 
     }
-
 
 
 

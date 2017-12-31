@@ -19,6 +19,7 @@ public class PaginationInterceptor implements HandlerInterceptor{
             System.out.println("======================================================================= paging");
             PageHelper.startPage(getPageNum(httpServletRequest), getPageSize(httpServletRequest));
         }
+        System.out.println("pagination param: pageNum:"+getPageNum(httpServletRequest)+ ", pageSize:"+getPageSize(httpServletRequest));
         return true;
     }
 

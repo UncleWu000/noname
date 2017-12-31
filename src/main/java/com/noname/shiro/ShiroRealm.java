@@ -45,7 +45,7 @@ public class ShiroRealm extends AuthorizingRealm{
             user = users.get(0);
         }
 
-        if(user!=null){
+        if(user==null){
             throw new AccountException("账号或者密码不正确!");
         }else if("0".equals(user.getStatus())){
             throw new  DisabledAccountException("该账号已被封停,请联系管理员!");
