@@ -1,5 +1,9 @@
 package com.noname.entity;
 
+
+import javax.persistence.Table;
+
+@Table(name = "u_role_permission")
 public class RolePermission {
     private Long rid;
 

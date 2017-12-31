@@ -1,5 +1,8 @@
 package com.noname.entity;
 
+import javax.persistence.Table;
+
+@Table(name = "u_permission")
 public class Permission {
     private Long id;
 

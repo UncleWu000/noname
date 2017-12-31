@@ -1,5 +1,8 @@
 package com.noname.entity;
 
+import javax.persistence.Table;
+
+@Table(name = "u_user_role")
 public class UserRole {
     private Long uid;
 

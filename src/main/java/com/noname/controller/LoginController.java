@@ -38,17 +38,19 @@ public class LoginController {
     @RequestMapping("/myLogin")
     @ResponseBody
     public Map<String, Object> submitLogin(String username, String password, Model model){
+
         Map<String, Object> resultMap = new LinkedHashMap<>();
-        System.out.println("i am here");
         try {
 
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+            System.out.println("i am here");
+
             System.out.println(token);
             SecurityUtils.getSubject().login(token);
             resultMap.put("status", "200");
             resultMap.put("message", "登陆成功!");
         }catch (Exception e){
-            resultMap.put("status", "501");
+            resultMap.put("status", "502");
             resultMap.put("message", e.getMessage());
         }
 

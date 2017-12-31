@@ -1,7 +1,9 @@
 package com.noname.entity;
 
+import javax.persistence.Table;
 import java.util.Date;
 
+@Table(name = "u_user")
 public class User {
     private Long id;
 

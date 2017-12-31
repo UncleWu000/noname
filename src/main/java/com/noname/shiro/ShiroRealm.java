@@ -39,6 +39,7 @@ public class ShiroRealm extends AuthorizingRealm{
         String password = String .valueOf(token.getPassword());
         System.out.println(username + "正尝试登陆...");
         List<User> users = userMapper.selectAll();
+        System.out.println(Arrays.toString(users.toArray()));
         User user = null;
         if(users.size()>0){
             user = users.get(0);
