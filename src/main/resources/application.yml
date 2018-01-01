@@ -1,6 +1,6 @@
-server:
-  port: 8081
-  context-path: /cs
+#server:
+#  port: 8081
+#  context-path: /cs
 
 # datasource
 spring:
@@ -19,6 +19,14 @@ spring:
     mvc:
       view:
         prefix:
+    redis:
+      host: 192.168.231.136
+      port: 6739
+      timeout: 10000
+      pool:
+        max-idle: 500
+        max-wait: 10000
+
 
 mybatis:
     type-aliases-package: com.noname.entity

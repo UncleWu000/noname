@@ -1,10 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="v0:war exploded">
-    <output-path>$PROJECT_DIR$/target/v0-1.0-SNAPSHOT</output-path>
+  <artifact type="exploded-war" name="noname:war exploded">
+    <output-path>$PROJECT_DIR$/target/noname</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="v0" />
+          <element id="module-output" name="noname" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-web:1.5.6.RELEASE" />
@@ -80,9 +80,9 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/v0-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/noname/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="v0/web/Web" />
+      <element id="javaee-facet-resources" facet="noname/web/Web" />
     </root>
   </artifact>
 </component>

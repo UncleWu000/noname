@@ -2,9 +2,12 @@ package com.noname.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.Id;
 import java.util.Date;
 
 public class Article {
+
+    @Id
     private Integer id;
 
     private String type;
