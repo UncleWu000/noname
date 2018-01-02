@@ -16,6 +16,8 @@ public class RedisServiceImpl implements RedisService{
     @Autowired
     JedisPool jedisPool;
 
+
+
     @Override
     public String getRdeisInfo() {
         Jedis jedis = null;
@@ -43,7 +45,7 @@ public class RedisServiceImpl implements RedisService{
             List<Slowlog> logList = jedis.slowlogGet(entries);
             return logList;
         } finally {
-           jedisPool.returnResource(jedis);
+            jedis.close();
         }
     }
 
@@ -87,4 +89,37 @@ public class RedisServiceImpl implements RedisService{
             jedis.close();;
         }
     }
+
+    @Override
+    public String getStrValue(String key) {
+        Jedis jedis = null;
+
+        String value;
+        try {
+            jedis = jedisPool.getResource();
+            value = jedis.get(key);
+        } finally {
+            jedis.close();;
+        }
+
+        return value;
+    }
+
+    @Override
+    public boolean addStrValue(String key, String val) {
+        Jedis jedis = null;
+
+        try {
+            jedis = jedisPool.getResource();
+            String falg = jedis.set(key, val);
+            if(falg!=null){
+                return true;
+            }
+        } finally {
+            jedis.close();
+        }
+        return false;
+    }
+
+
 }

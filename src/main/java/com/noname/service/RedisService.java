@@ -38,4 +38,8 @@ public interface RedisService {
      * @return
      */
     Long dbSize();
+
+    String getStrValue(String key);
+
+    boolean addStrValue(String key, String val);
 }

@@ -21,11 +21,12 @@ spring:
         prefix:
     redis:
       host: 192.168.231.136
-      port: 6739
+      port: 6379
       timeout: 10000
       pool:
         max-idle: 500
-        max-wait: 10000
+        max-wait: 1000
+      password: yesismetoo
 
 
 mybatis:
