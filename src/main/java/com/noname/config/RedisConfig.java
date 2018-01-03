@@ -45,4 +45,6 @@ public class RedisConfig extends CachingConfigurerSupport {
         return jedisPool;
     }
 
+
+
 }
