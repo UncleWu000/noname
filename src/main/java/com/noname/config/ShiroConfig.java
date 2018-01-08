@@ -56,9 +56,11 @@ public class ShiroConfig {
 //        System.out.println(permission.getUrl());
 //        List<Permission> permissions = permissionMapper.selectAll();
 //        permissions.forEach(p-> System.out.println(p.getUrl()+":"+p.getName()));
-        filterChainDefinitionMap.put("/myLogin", "authc");
+        filterChainDefinitionMap.put("/article/list/**",  "anon");
+        filterChainDefinitionMap.put("/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+
         System.out.println("Shiro拦截器工厂类注入成功");
         return shiroFilterFactoryBean;
 

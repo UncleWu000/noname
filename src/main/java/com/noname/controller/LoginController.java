@@ -1,6 +1,7 @@
 package com.noname.controller;
 
 import com.noname.util.EncrypUtils;
+import org.apache.catalina.security.SecurityUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +40,14 @@ public class LoginController {
         }
 
         return resultMap;
+    }
+
+    @RequestMapping("logOut")
+    public void logOut(HttpServletRequest request){
+
+        SecurityUtils.getSubject().logout();;
+        String username = (String) SecurityUtils.getSubject().getSession().getId();
+        System.out.println(username +" 已登出");
     }
 
 }
