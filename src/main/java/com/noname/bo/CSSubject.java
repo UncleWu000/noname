@@ -4,7 +4,7 @@ import ch.qos.logback.core.rolling.helper.IntegerTokenConverter;
 
 import java.util.Date;
 
-public class CSObject {
+public class CSSubject {
 
     private Integer id;
 

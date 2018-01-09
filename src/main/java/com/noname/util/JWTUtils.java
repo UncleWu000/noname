@@ -5,9 +5,7 @@ import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import com.noname.auth.MACVerifierEnhance;
-import com.noname.bo.CSObject;
-import jdk.nashorn.internal.parser.Token;
-import net.minidev.json.writer.JsonReader;
+import com.noname.bo.CSSubject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -190,10 +188,10 @@ public class JWTUtils {
      * @param token
      * @return
      */
-    public static CSObject getSubject(String token) {
+    public static CSSubject getSubject(String token) {
         String json = getFromTokenInfo(token);
         if (StringUtils.isNotBlank(json)) {
-            return JsonUtil.fromJson(json, CSObject.class);
+            return JsonUtil.fromJson(json, CSSubject.class);
         }
         return null;
     }
