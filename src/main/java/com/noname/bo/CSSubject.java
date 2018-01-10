@@ -1,7 +1,5 @@
 package com.noname.bo;
 
-import ch.qos.logback.core.rolling.helper.IntegerTokenConverter;
-
 import java.util.Date;
 
 public class CSSubject {
@@ -14,7 +12,7 @@ public class CSSubject {
 
     private Integer channel;
 
-    private Integer channerOrManager;
+    private Integer clientOrManage;
 
     private long createDate =  new Date().getTime();
 
@@ -54,12 +52,12 @@ public class CSSubject {
         this.channel = channel;
     }
 
-    public Integer getChannerOrManager() {
-        return channerOrManager;
+    public Integer getClientOrManage() {
+        return clientOrManage;
     }
 
-    public void setChannerOrManager(Integer channerOrManager) {
-        this.channerOrManager = channerOrManager;
+    public void setClientOrManage(Integer clientOrManage) {
+        this.clientOrManage = clientOrManage;
     }
 
     public long getCreateDate() {

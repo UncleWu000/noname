@@ -1,19 +1,17 @@
 package com.noname.config;
 
-import com.noname.entity.Permission;
+import com.noname.auth.filter.TokenFormAuthenticationFilter;
 import com.noname.mapper.PermissionMapper;
 import com.noname.shiro.ShiroRealm;
-import com.sun.org.apache.bcel.internal.generic.NEW;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.web.servlet.ShiroFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.apache.shiro.mgt.SecurityManager;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 @Configuration
@@ -26,6 +24,10 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager){
         System.out.println("shiro inject!!!");
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();
+        filters.put("authc", new TokenFormAuthenticationFilter());
+
+
 
         //设置SecurityManager
         shiroFilterFactoryBean.setSecurityManager(securityManager);
