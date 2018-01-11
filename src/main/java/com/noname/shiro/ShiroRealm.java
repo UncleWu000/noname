@@ -1,7 +1,9 @@
 package com.noname.shiro;
 
+import com.noname.bo.user.CSSubject;
 import com.noname.entity.*;
 import com.noname.mapper.*;
+import com.noname.util.JsonUtil;
 import org.apache.ibatis.logging.stdout.StdOutImpl;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -34,13 +36,18 @@ public class ShiroRealm extends AuthorizingRealm{
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+        System.out.println("token -> " + token.toString());
         System.out.println("身份认证方法：MyShiroRealm.doGetAuthenticationInfo()");
-        String username = token.getUsername();
+        String subjectStr = token.getUsername();
+        CSSubject csSubject = JsonUtil.fromJson(subjectStr, CSSubject.class);
+        String username = csSubject.getUsername();
         String password = String .valueOf(token.getPassword());
         System.out.println(username + "正尝试登陆...");
-        List<User> users = userMapper.selectAll();
+
+        User user = new User();
+        user.setNickname(username);
+        List<User> users = userMapper.select(user);
         System.out.println(Arrays.toString(users.toArray()));
-        User user = null;
         if(users.size()>0){
             user = users.get(0);
         }

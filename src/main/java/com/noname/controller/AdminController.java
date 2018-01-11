@@ -18,6 +18,7 @@ public class AdminController {
 
     @GetMapping("/list")
     public Map<String, Object> getUsers(){
+        System.out.println("userlist in");
         Map<String, Object> map = new HashMap<>();
         map.put("data", userMapper.selectAll());
         return map;

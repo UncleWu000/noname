@@ -1,12 +1,14 @@
 package com.noname.interceptor;
 
 import com.noname.util.JWTUtils;
+import com.noname.util.JsonUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -38,9 +40,7 @@ public class RequestInterceptor implements HandlerInterceptor {
             sb.append(" userInfo : [" + userInfo + "] \n");
         }
         Map map = request.getParameterMap();
-        Set set = map.entrySet();
-        set.forEach(i-> System.out.println(i.toString()));
-        //sb.append(" requestParam : [" + JsonUtil.toJson(map) + "]");
+        sb.append(" requestParam : [" + JsonUtil.toJson(map) + "]");
 
         return sb.toString();
     }
