@@ -1,5 +1,7 @@
 package com.noname.bo;
 
+import com.noname.constant.ResultConst;
+
 public class Result {
 
     private String status;
@@ -8,7 +10,10 @@ public class Result {
 
     private String msg;
 
-    public Result(){};
+    public Result(){
+        this.status = ResultConst.status.TRUE;
+        this.code = ResultConst.code.SUCCESS;
+    };
 
     public Result(String status, String code, String msg){
         this.status = status;
@@ -37,6 +42,17 @@ public class Result {
     }
 
     public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public void setExceptionStatus(){
+        this.status = ResultConst.status.FALSE;
+        this.code = ResultConst.code.EXCEPTION;
+    }
+
+    public void setExceptionStatus(String msg) {
+        this.status = ResultConst.status.FALSE;
+        this.code = ResultConst.code.EXCEPTION;
         this.msg = msg;
     }
 }
