@@ -1,9 +1,11 @@
 package com.noname.entity;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "u_role")
 public class Role {
+    @Id
     private Long id;
 
     private String name;

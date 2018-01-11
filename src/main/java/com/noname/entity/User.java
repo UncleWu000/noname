@@ -1,10 +1,12 @@
 package com.noname.entity;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
 @Table(name = "u_user")
 public class User {
+    @Id
     private Long id;
 
     private String nickname;

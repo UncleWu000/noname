@@ -36,11 +36,12 @@ public class ShiroRealm extends AuthorizingRealm{
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        System.out.println("token -> " + token.toString());
-        System.out.println("身份认证方法：MyShiroRealm.doGetAuthenticationInfo()");
-        String subjectStr = token.getUsername();
-        CSSubject csSubject = JsonUtil.fromJson(subjectStr, CSSubject.class);
-        String username = csSubject.getUsername();
+//        System.out.println("token -> " + token.toString());
+//        System.out.println("身份认证方法：MyShiroRealm.doGetAuthenticationInfo()");
+//        String subjectStr = token.getUsername();
+//        CSSubject csSubject = JsonUtil.fromJson(subjectStr, CSSubject.class);
+//        String username = csSubject.getUsername();
+        String username = token.getUsername();
         String password = String .valueOf(token.getPassword());
         System.out.println(username + "正尝试登陆...");
 
@@ -66,15 +67,16 @@ public class ShiroRealm extends AuthorizingRealm{
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        User user = (User) SecurityUtils.getSubject().getPrincipal();
-        Long userId = user.getId();
-
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        System.out.println(user.getId());
+
+        Long userId = user.getId();
 
         //查找用户拥有的角色及权限
         Set<String> roleSet = new HashSet<>();
         Set<String> rolePermissions = new HashSet<>();
-        UserRole userRole = null;
+        UserRole userRole = new UserRole();
         RolePermission rolePermission = null;
         Permission permission = null;
         userRole.setUid(userId);

@@ -1,9 +1,12 @@
 package com.noname.entity;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "u_permission")
 public class Permission {
+
+    @Id
     private Long id;
 
     private String url;
