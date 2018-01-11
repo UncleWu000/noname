@@ -1,23 +1,21 @@
 package com.noname.interceptor;
 
-import com.noname.util.EncrypUtils;
-import com.noname.util.ResponeUtils;
+import com.noname.util.JWTUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.Set;
 
 public class RequestInterceptor implements HandlerInterceptor {
 
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-
+        System.out.println(requestUrl(httpServletRequest));
         return true;
     }
 
@@ -30,6 +28,21 @@ public class RequestInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
         
     }
+    public String requestUrl(HttpServletRequest request) {
+        StringBuilder sb = new StringBuilder(request.getRequestURL().toString());
 
+
+        String jwt = request.getHeader("token");
+        if (StringUtils.isNotBlank(jwt)) {
+            String userInfo = JWTUtils.getFromTokenInfo(jwt);
+            sb.append(" userInfo : [" + userInfo + "] \n");
+        }
+        Map map = request.getParameterMap();
+        Set set = map.entrySet();
+        set.forEach(i-> System.out.println(i.toString()));
+        //sb.append(" requestParam : [" + JsonUtil.toJson(map) + "]");
+
+        return sb.toString();
+    }
 
 }
