@@ -1,26 +1,41 @@
 package com.noname.auth.filter;
 
+import com.github.panchitoboy.shiro.jwt.filter.JWTAuthenticationToken;
+import com.nimbusds.jose.JWSObject;
 import com.noname.bo.CSSubject;
 import com.noname.constant.CSSubjectConst;
 import com.noname.constant.HeaderConst;
 import com.noname.util.JWTUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
 import org.apache.shiro.web.util.WebUtils;
 
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.StringReader;
+import java.text.ParseException;
 
-public class TokenFormAuthenticationFilter extends FormAuthenticationFilter {
+public class TokenFormAuthenticationFilter extends AuthenticatingFilter {
 
-
+    public static final String USER_ID = "userId";
+    public static final String PASSWORD = "password";
     protected static final String AUTHORIZATION_HEADER = "token";
+
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         System.out.println(((HttpServletRequest)request).getRequestURI());
         String token = ((HttpServletRequest) request).getHeader(HeaderConst.param.TOKEN);
-        System.out.println("token -> "+token);
+        System.out.println("token -> " + token );
+
 
         if(StringUtils.isBlank(token)){
             //response 4010
@@ -77,6 +92,58 @@ public class TokenFormAuthenticationFilter extends FormAuthenticationFilter {
     protected String getAuthzHeader(ServletRequest request) {
         HttpServletRequest httpRequest = WebUtils.toHttp(request);
         return httpRequest.getHeader(AUTHORIZATION_HEADER);
+    }
+
+    @Override
+    protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) throws IOException {
+
+        if (isLoginRequest(request, response)) {
+            String json = IOUtils.toString(request.getInputStream());
+
+            if (json != null && !json.isEmpty()) {
+
+                try (JsonReader jr = Json.createReader(new StringReader(json))) {
+                    JsonObject object = jr.readObject();
+                    String username = object.getString(USER_ID);
+                    String password = object.getString(PASSWORD);
+                    return new UsernamePasswordToken(username, password);
+                }
+
+            }
+        }
+
+        if (isLoggedAttempt(request, response)) {
+            String jwtToken = getAuthzHeader(request);
+            if (jwtToken != null) {
+                return createToken(jwtToken);
+            }
+        }
+
+        return new UsernamePasswordToken();
+    }
+
+    public JWTAuthenticationToken createToken(String token) {
+        try {
+            JWSObject jwsObject = JWSObject.parse(token);
+            String decrypted = jwsObject.getPayload().toString();
+
+            try (JsonReader jr = Json.createReader(new StringReader(decrypted))) {
+                JsonObject object = jr.readObject();
+
+                String userId = object.getString("sub", null);
+                return new JWTAuthenticationToken(userId, token);
+            }
+
+        } catch (ParseException ex) {
+            throw new AuthenticationException(ex);
+        }
+
+    }
+
+    @Override
+    protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request, ServletResponse response) {
+       // responseUnauthorized(request, response);
+        return false;
     }
 
 }

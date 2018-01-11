@@ -1,6 +1,5 @@
 package com.noname.config;
 
-import com.noname.auth.filter.TokenFormAuthenticationFilter;
 import com.noname.mapper.PermissionMapper;
 import com.noname.shiro.ShiroRealm;
 import org.apache.shiro.mgt.SecurityManager;
@@ -25,7 +24,7 @@ public class ShiroConfig {
         System.out.println("shiro inject!!!");
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();
-        filters.put("authc", new TokenFormAuthenticationFilter());
+        //filters.put("authc", new TokenFormAuthenticationFilter());
 
 
 
@@ -59,7 +58,8 @@ public class ShiroConfig {
 //        List<Permission> permissions = permissionMapper.selectAll();
 //        permissions.forEach(p-> System.out.println(p.getUrl()+":"+p.getName()));
         filterChainDefinitionMap.put("/article/list/**",  "anon");
-        filterChainDefinitionMap.put("/**", "authc");
+
+        //filterChainDefinitionMap.put("/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 

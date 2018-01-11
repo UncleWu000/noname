@@ -1,18 +1,20 @@
 package com.noname.controller;
 
-import com.noname.util.EncrypUtils;
-import org.apache.catalina.security.SecurityUtil;
+import com.noname.bo.CSSubject;
+import com.noname.bo.CSToken;
+import com.noname.constant.CSSubjectConst;
+import com.noname.util.JsonUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -48,6 +50,25 @@ public class LoginController {
         SecurityUtils.getSubject().logout();;
         String username = (String) SecurityUtils.getSubject().getSession().getId();
         System.out.println(username +" 已登出");
+    }
+
+    @RequestMapping("tokenLogin")
+    public String tokenLogin(String username, String password){
+
+        if(StringUtils.isBlank(username) || StringUtils.isBlank(password)){
+            return "账号或密码不正确!";
+        }
+        Subject subject = SecurityUtils.getSubject();
+        CSSubject csSubject = new CSSubject(1,username, 1, CSSubjectConst.ClientOrManage.MANAGE);
+        UsernamePasswordToken token = new UsernamePasswordToken(csSubject.toJson(), password);
+        token.setRememberMe(false);
+        //subject.login(token);
+        CSToken csToken = generateAdminToken(csSubject);
+        return JsonUtil.toJson(csToken);
+    }
+
+    private CSToken generateAdminToken(CSSubject csSubject) {
+        return csSubject.toToken();
     }
 
 }

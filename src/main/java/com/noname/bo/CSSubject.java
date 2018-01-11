@@ -1,5 +1,9 @@
 package com.noname.bo;
 
+import com.noname.constant.CSSubjectConst;
+import com.noname.util.JWTUtils;
+import com.noname.util.JsonUtil;
+
 import java.util.Date;
 
 public class CSSubject {
@@ -19,6 +23,15 @@ public class CSSubject {
     private  String activityCode;
 
     private String tokenType;
+
+    public CSSubject(){};
+
+    public CSSubject(Integer userId, String usernmae, Integer channel, Integer clientOrManager){
+        this.id = userId;
+        this.username = usernmae;
+        this.channel = channel;
+        this.clientOrManage = clientOrManager;
+    }
 
     public Integer getId() {
         return id;
@@ -83,4 +96,64 @@ public class CSSubject {
     public void setTokenType(String tokenType) {
         this.tokenType = tokenType;
     }
+
+    public String toJson() {
+        return JsonUtil.toJson(this);
+    }
+
+    /**
+     * 获取token
+     * @return
+     */
+    public String toAccessToken(){
+        this.tokenType = CSSubjectConst.type.ACCESS_TOKEN;
+        return JWTUtils.createToken(toJson(), CSSubjectConst.time.THREE_DAY_IN_MILLISECOND);
+    }
+
+
+    public String toAccessToken(long millisSecond) {
+        this.tokenType = CSSubjectConst.type.ACCESS_TOKEN;
+        return JWTUtils.createToken(toJson(), millisSecond);
+    }
+
+
+    /**
+     * 获取刷新的token
+     * @return
+     */
+    public String toRefressToken(){
+        this.tokenType = CSSubjectConst.type.REFRESS_TOKEN;
+        return JWTUtils.createToken(toJson(), CSSubjectConst.time.TEN_DAY_IN_MILLISECOND);
+    }
+
+    public String toRefressToken(long millisSecond) {
+        this.tokenType = CSSubjectConst.type.REFRESS_TOKEN;
+        return JWTUtils.createToken(toJson(), millisSecond);
+    }
+
+    public CSToken toToken(){
+        CSToken csToken = new CSToken();
+        csToken.setToken(toAccessToken());
+        csToken.setRefreshToken(toRefressToken());
+        csToken.setExpireIn(CSSubjectConst.time.THREE_DAY_IN_MILLISECOND);
+        return csToken;
+    }
+
+    /**
+     * 指定授权token与刷新token的生存时间, 然后生成CSToken对象
+     * @param accessTokenMillisSecond
+     * @param refreshTokenMillisSecond
+     * @return
+     */
+    public CSToken toToken(long accessTokenMillisSecond, long refreshTokenMillisSecond) {
+        CSToken CSToken = new CSToken();
+        CSToken.setToken(toAccessToken(accessTokenMillisSecond));
+        CSToken.setRefreshToken(toRefressToken(refreshTokenMillisSecond));
+        CSToken.setExpireIn(accessTokenMillisSecond);
+        return CSToken;
+    }
+
+
+
+
 }

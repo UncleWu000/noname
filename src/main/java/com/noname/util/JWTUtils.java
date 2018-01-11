@@ -23,7 +23,7 @@ public class JWTUtils {
 
     private static final String ISSUER = "zqucs";
 
-    private static String SHARE_KEY = "!@#$%^";
+    private static String SHARE_KEY = "!@#$%^!!CoursessELection**Hello,Stu)))";
 
     private static final Logger log = LoggerFactory.getLogger(JWTUtils.class);
 
@@ -59,7 +59,7 @@ public class JWTUtils {
             builder.expirationTime(new Date(new Date().getTime() + expireInMillisecond));
             builder.jwtID(UUID.randomUUID().toString());
             JWTClaimsSet claimsSet = builder.build();
-            JWSHeader header = new JWSHeader(JWSAlgorithm.ES256);
+            JWSHeader header = new JWSHeader(JWSAlgorithm.HS256);
             Payload payload = new Payload(claimsSet.toJSONObject());
             JWSObject jwsObject = new JWSObject(header, payload);
             JWSSigner signer = new MACSigner(SHARE_KEY.getBytes());
