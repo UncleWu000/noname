@@ -77,8 +77,8 @@ public class ShiroRealm extends AuthorizingRealm{
         Set<String> roleSet = new HashSet<>();
         Set<String> rolePermissions = new HashSet<>();
         UserRole userRole = new UserRole();
-        RolePermission rolePermission = null;
-        Permission permission = null;
+        RolePermission rolePermission = new RolePermission();
+        Permission permission = new Permission();
         userRole.setUid(userId);
         System.out.println(user.getNickname() + "正尝试登陆...");
         System.out.println("角色类型:{");
@@ -89,8 +89,9 @@ public class ShiroRealm extends AuthorizingRealm{
             System.out.println(role.getName() + "-权限:[");
             rolePermission.setRid(ur.getRid());
             rolePermissionMapper.select(rolePermission).forEach(rp->{
-                    permission.setId(rp.getRid());
+                    permission.setId(rp.getPid());
                     permissionMapper.select(permission).forEach(p->{
+
                         rolePermissions.add(p.getName());
                         System.out.println(p.getName()+" ");
                     });
