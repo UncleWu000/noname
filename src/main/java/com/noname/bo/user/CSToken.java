@@ -1,4 +1,4 @@
-package com.noname.bo;
+package com.noname.bo.user;
 
 public class CSToken {
 

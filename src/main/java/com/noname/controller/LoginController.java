@@ -1,7 +1,7 @@
 package com.noname.controller;
 
-import com.noname.bo.CSSubject;
-import com.noname.bo.CSToken;
+import com.noname.bo.user.CSSubject;
+import com.noname.bo.user.CSToken;
 import com.noname.constant.CSSubjectConst;
 import com.noname.util.JsonUtil;
 import org.apache.commons.lang3.StringUtils;

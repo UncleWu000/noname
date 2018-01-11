@@ -1,4 +1,4 @@
-package com.noname.bo;
+package com.noname.bo.user;
 
 import com.noname.constant.CSSubjectConst;
 import com.noname.util.JWTUtils;

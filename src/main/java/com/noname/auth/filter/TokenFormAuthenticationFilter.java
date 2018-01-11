@@ -2,7 +2,7 @@ package com.noname.auth.filter;
 
 import com.github.panchitoboy.shiro.jwt.filter.JWTAuthenticationToken;
 import com.nimbusds.jose.JWSObject;
-import com.noname.bo.CSSubject;
+import com.noname.bo.user.CSSubject;
 import com.noname.constant.CSSubjectConst;
 import com.noname.constant.HeaderConst;
 import com.noname.util.JWTUtils;
