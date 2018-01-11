@@ -1,9 +1,10 @@
 package com.noname.controller;
 
+import com.noname.bo.DataResult;
+import com.noname.bo.Result;
 import com.noname.bo.user.CSSubject;
 import com.noname.bo.user.CSToken;
 import com.noname.constant.CSSubjectConst;
-import com.noname.util.JsonUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -53,10 +54,9 @@ public class LoginController {
     }
 
     @RequestMapping("tokenLogin")
-    public String tokenLogin(String username, String password){
-
+    public Result tokenLogin(String username, String password){
         if(StringUtils.isBlank(username) || StringUtils.isBlank(password)){
-            return "账号或密码不正确!";
+            return new Result(false);
         }
         Subject subject = SecurityUtils.getSubject();
         CSSubject csSubject = new CSSubject(1,username, 1, CSSubjectConst.ClientOrManage.MANAGE);
@@ -64,7 +64,7 @@ public class LoginController {
         token.setRememberMe(false);
         //subject.login(token);
         CSToken csToken = generateAdminToken(csSubject);
-        return JsonUtil.toJson(csToken);
+        return new DataResult<>(csToken);
     }
 
     private CSToken generateAdminToken(CSSubject csSubject) {

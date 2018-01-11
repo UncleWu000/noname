@@ -15,6 +15,16 @@ public class Result {
         this.code = ResultConst.code.SUCCESS;
     };
 
+    public Result(boolean bool){
+        if(bool){
+            this.status = ResultConst.status.TRUE;
+            this.code = ResultConst.code.SUCCESS;
+        }else{
+            this.status = ResultConst.status.FALSE;
+            this.code = ResultConst.code.EXCEPTION;
+        }
+    }
+
     public Result(String status, String code, String msg){
         this.status = status;
         this.code = code;
