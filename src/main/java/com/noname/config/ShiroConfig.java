@@ -25,7 +25,7 @@ public class ShiroConfig {
         System.out.println("shiro inject!!!");
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();
-       // filters.put("authc", new TokenFormAuthenticationFilter());
+        filters.put("authc", new TokenFormAuthenticationFilter());
 
 
 
@@ -33,7 +33,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
         //如果不设置会默认寻找Web工程下的"/login.jsp"页面
-        shiroFilterFactoryBean.setLoginUrl("/myLogin");
+        shiroFilterFactoryBean.setLoginUrl("/tokenLogin");
 
         //登陆成功之后跳转的页面
         shiroFilterFactoryBean.setSuccessUrl("/index");
@@ -58,8 +58,9 @@ public class ShiroConfig {
 //        System.out.println(permission.getUrl());
 //        List<Permission> permissions = permissionMapper.selectAll();
 //        permissions.forEach(p-> System.out.println(p.getUrl()+":"+p.getName()));
+        filterChainDefinitionMap.put("/tokenLogin",  "anon");
         filterChainDefinitionMap.put("/article/list/**",  "anon");
-        filterChainDefinitionMap.put("/user/**",  "perms[shiro登陆 ]");
+        filterChainDefinitionMap.put("/user/**",  "perms[查询用户列表]");
         filterChainDefinitionMap.put("/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

@@ -12,6 +12,8 @@ public class CSSubject {
 
     private String username;
 
+    private String password;
+
     private String clientId;
 
     private Integer channel;
@@ -31,6 +33,14 @@ public class CSSubject {
         this.username = usernmae;
         this.channel = channel;
         this.clientOrManage = clientOrManager;
+    }
+
+    public CSSubject(Integer userId, String usernmae,String password, Integer channel, Integer clientOrManager){
+        this.id = userId;
+        this.username = usernmae;
+        this.channel = channel;
+        this.clientOrManage = clientOrManager;
+        this.password = password;
     }
 
     public Integer getId() {
@@ -99,6 +109,14 @@ public class CSSubject {
 
     public String toJson() {
         return JsonUtil.toJson(this);
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**
