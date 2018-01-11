@@ -62,7 +62,7 @@ public class LoginController {
         CSSubject csSubject = new CSSubject(1,username, 1, CSSubjectConst.ClientOrManage.MANAGE);
         UsernamePasswordToken token = new UsernamePasswordToken(csSubject.toJson(), password);
         token.setRememberMe(false);
-        //subject.login(token);
+        subject.login(token);
         CSToken csToken = generateAdminToken(csSubject);
         return new DataResult<>(csToken);
     }
