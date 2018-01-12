@@ -80,6 +80,7 @@ public class TokenFormAuthenticationFilter extends AuthenticatingFilter {
             }
         }
 
+        System.out.println("finish myfilter" + loggedIn + "=======================");
         return loggedIn;
     }
 
