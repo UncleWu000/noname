@@ -2,6 +2,7 @@ package com.noname.controller;
 
 import com.noname.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ public class AdminController {
     UserMapper userMapper;
 
     @GetMapping("/list")
+    @Cacheable(value = "userlist")
     public Map<String, Object> getUsers(){
         System.out.println("userlist in");
         Map<String, Object> map = new HashMap<>();

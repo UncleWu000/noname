@@ -35,7 +35,7 @@ public class CSSubjectConst {
         /**
          * 以秒为单位3天时间
          */
-        public static final long TEN_DAY_IN_MILLISECOND = 1000 * 60 * 60 * 24 * THREE_DAY;
+        public static final long TEN_DAY_IN_MILLISECOND = 1000 * 60 * 60 * 24 * TEN_DAY;
 
         /**
          * 15分钟

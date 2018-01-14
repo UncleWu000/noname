@@ -39,16 +39,19 @@ public class TokenFormAuthenticationFilter extends AuthenticatingFilter {
 
         if(StringUtils.isBlank(token)){
             //response 4010
+            System.out.println("token is blank?");
             return false;
         }
 
         if(!!JWTUtils.isTokenLegal(token)){
             //response 4011
+            System.out.println("token is legal?");
             return false;
         }
 
         if(JWTUtils.isTokenExpired(token)){
             //response 4012
+            System.out.println("token is expired?");
             return false;
         }
 

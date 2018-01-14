@@ -7,7 +7,7 @@ public class ArticleVO extends Article {
 
     public String getCreateDateStr(){
         if(getCreateDate()!=null){
-            return DateUtils.format(getCreateDate());
+            return DateUtils.format(getCreateDate(), DateUtils.YMD);
         }
         return null;
     }

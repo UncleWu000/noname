@@ -5,6 +5,9 @@ import com.nimbusds.jose.JWSHeader;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jose.util.Base64URL;
 import com.nimbusds.jwt.JWTClaimsSet;
+import com.noname.util.DateUtils;
+
+import javax.xml.crypto.Data;
 
 public class MACVerifierEnhance extends MACVerifier {
 
@@ -26,6 +29,8 @@ public class MACVerifierEnhance extends MACVerifier {
      */
     public boolean isExpired() {
         long time = System.currentTimeMillis();
+        System.out.println("生效时间:" + DateUtils.format(claimsSet.getNotBeforeTime(), DateUtils.YMDHMS));
+        System.out.println("失效时间:" + DateUtils.format(claimsSet.getExpirationTime(), DateUtils.YMDHMS));
         return !(claimsSet.getNotBeforeTime().getTime() <= time && time < claimsSet.getExpirationTime().getTime());
     }
 
