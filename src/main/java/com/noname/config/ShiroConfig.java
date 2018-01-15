@@ -58,10 +58,10 @@ public class ShiroConfig {
 //        System.out.println(permission.getUrl());
 //        List<Permission> permissions = permissionMapper.selectAll();
 //        permissions.forEach(p-> System.out.println(p.getUrl()+":"+p.getName()));
-        filterChainDefinitionMap.put("/tokenLogin",  "anon");
-        filterChainDefinitionMap.put("/article/list/**",  "anon");
-        filterChainDefinitionMap.put("/user/**",  "perms[查询用户列表]");
-        filterChainDefinitionMap.put("/**", "authc");
+//        filterChainDefinitionMap.put("/tokenLogin",  "anon");
+//        filterChainDefinitionMap.put("/article/list/**",  "anon");
+//        filterChainDefinitionMap.put("/user/**",  "perms[查询用户列表]");
+        //filterChainDefinitionMap.put("/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
