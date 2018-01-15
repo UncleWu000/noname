@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
-import org.springframework.cache.CacheManager;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
-import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -43,7 +43,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     private long maxWaitMillis;
 
     @Bean
-    public JedisPool redisPoolFactory() {
+    public JedisPool redisPool() {
     	Logger.getLogger(getClass()).info("JedisPool注入成功");
         Logger.getLogger(getClass()).info("redis地址：" + host + ":" + port);
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
@@ -54,6 +54,8 @@ public class RedisConfig extends CachingConfigurerSupport {
 
         return jedisPool;
     }
+
+
 
     @Bean
     public CacheManager cacheManager (@SuppressWarnings("rawtypes")RedisTemplate redisTemplate){

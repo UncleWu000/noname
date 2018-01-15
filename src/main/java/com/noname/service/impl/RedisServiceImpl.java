@@ -1,19 +1,19 @@
 package com.noname.service.impl;
 
 import com.noname.service.RedisService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Client;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.util.Slowlog;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class RedisServiceImpl implements RedisService{
 
-    @Autowired
+    @Resource
     JedisPool jedisPool;
 
 
@@ -111,6 +111,7 @@ public class RedisServiceImpl implements RedisService{
 
         try {
             jedis = jedisPool.getResource();
+            System.out.println("jedis:"+jedis);
             String falg = jedis.set(key, val);
             if(falg!=null){
                 return true;
