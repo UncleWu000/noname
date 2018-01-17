@@ -26,7 +26,8 @@ spring:
       pool:
         max-idle: 500
         max-wait: 1000
-      #password: yesismetoo
+    cache:
+      type: redis
 
 
 mybatis:

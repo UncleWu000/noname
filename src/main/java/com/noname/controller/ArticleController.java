@@ -7,6 +7,7 @@ import com.noname.mapper.ArticleMapper;
 import com.noname.vo.ArticleVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -56,6 +57,7 @@ public class ArticleController {
     //读取文章列表
     @GetMapping("/list/{rule}")
     @Pagination
+    @Cacheable("articlelist")
     public Map<String, Object> getList2(@PathVariable(required = false, value = "rule")String rule){
         System.out.println("获取文章列表...");
         Map<String, Object> map = new HashMap<>();
