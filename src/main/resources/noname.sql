@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : MySQL
-Source Server Version : 50556
+Source Server         : Local
+Source Server Version : 50558
 Source Host           : localhost:3306
 Source Database       : noname
 
 Target Server Type    : MYSQL
-Target Server Version : 50556
+Target Server Version : 50558
 File Encoding         : 65001
 
-Date: 2018-01-11 20:55:29
+Date: 2018-01-19 15:06:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -51,6 +51,29 @@ INSERT INTO `article` VALUES ('16', null, null, null, null, null, null);
 INSERT INTO `article` VALUES ('17', null, null, null, null, null, null);
 
 -- ----------------------------
+-- Table structure for course
+-- ----------------------------
+DROP TABLE IF EXISTS `course`;
+CREATE TABLE `course` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_name` varchar(255) DEFAULT NULL,
+  `score` int(11) DEFAULT NULL,
+  `teacher` varchar(255) DEFAULT NULL COMMENT '老师',
+  `selected_max` int(11) DEFAULT NULL COMMENT '限选',
+  `selected_now` int(11) DEFAULT NULL COMMENT '已选',
+  `course_type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of course
+-- ----------------------------
+INSERT INTO `course` VALUES ('1', '青春期性生理健康', '99', '宋桂冬', '118', '1', 'Hentai书籍');
+INSERT INTO `course` VALUES ('2', '房中要术', '99', '宋桂冬', '120', '1', 'Hentai书籍');
+INSERT INTO `course` VALUES ('3', '读者', '99', '卓钟侄', '120', '1', '文化毒物');
+INSERT INTO `course` VALUES ('4', '公残党复兴', '99', '卓钟侄', '120', '1', '政治启蒙毒物');
+
+-- ----------------------------
 -- Table structure for manager
 -- ----------------------------
 DROP TABLE IF EXISTS `manager`;
@@ -75,12 +98,13 @@ CREATE TABLE `u_permission` (
   `url` varchar(256) DEFAULT NULL COMMENT 'url地址',
   `name` varchar(64) DEFAULT NULL COMMENT 'url描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of u_permission
 -- ----------------------------
 INSERT INTO `u_permission` VALUES ('1', '/myLogin', 'shiro登陆');
+INSERT INTO `u_permission` VALUES ('2', '/user/list', '查询用户列表');
 
 -- ----------------------------
 -- Table structure for u_role
@@ -111,6 +135,7 @@ CREATE TABLE `u_role_permission` (
 -- Records of u_role_permission
 -- ----------------------------
 INSERT INTO `u_role_permission` VALUES ('1', '1');
+INSERT INTO `u_role_permission` VALUES ('1', '2');
 
 -- ----------------------------
 -- Table structure for u_user
