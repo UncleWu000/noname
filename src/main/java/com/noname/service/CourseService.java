@@ -8,5 +8,5 @@ public interface CourseService {
 
     List<Course> getCourseList();
 
-    Integer getCourseNumber(Integer id, Integer num);
+    Integer getCourseNumber(Integer id, Integer numMax, Integer numNow);
 }

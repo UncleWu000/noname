@@ -48,10 +48,10 @@ public class CourseServiceImpl implements CourseService {
         return map;
     }
 
-    @Cacheable(value = "courseNumber", key = "'course#'+#id")
-    public Integer getCourseNumber(Integer id, Integer num){
-        Integer restNum = num;
-        return restNum;
+    @CachePut(value = "courseNumber", key = "'course#'+#id")
+    public Integer getCourseNumber(Integer id, Integer numMax, Integer numNow){
+        Integer rs = numMax-numNow;
+        return rs;
     }
 
 
