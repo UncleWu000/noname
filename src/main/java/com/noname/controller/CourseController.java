@@ -3,6 +3,7 @@ package com.noname.controller;
 import com.noname.entity.Course;
 import com.noname.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,9 +15,13 @@ import java.util.List;
 @RestController
 public class CourseController {
 
+//    @PostConstruct
+//    public void doAtFirst(){
+//        initializing.afterPropertiesSet();
+//    }
+//
     @Autowired
     CourseService courseService;
-
 
 
     @GetMapping("/courseList")
@@ -27,6 +32,12 @@ public class CourseController {
         return courses;
     }
 
+    @GetMapping("/test")
+    @Cacheable(value = "testNum")
+    public String test(){
+
+        return "success";
+    }
 
 
 }

@@ -22,7 +22,7 @@ public class CourseServiceImpl implements CourseService {
     @Cacheable("courseList")
     public List<Course> getCourseList() {
 
-        List<Course> courses = courseMapper.selectAll();
+        List<Course> courses = courseMapper.selectAll2();
         return courses;
     }
 
@@ -46,6 +46,12 @@ public class CourseServiceImpl implements CourseService {
             map.put(s.getCourseName(), s.getSelectedNow());
         });
         return map;
+    }
+
+    @Cacheable(value = "courseNumber", key = "'course#'+#id")
+    public Integer getCourseNumber(Integer id, Integer num){
+        Integer restNum = num;
+        return restNum;
     }
 
 

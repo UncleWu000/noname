@@ -11,4 +11,8 @@
     <result column="course_type" property="courseType" jdbcType="VARCHAR" />
   </resultMap>
 
+  <select id="selectAll2" resultMap="BaseResultMap">
+    SELECT * FROM course;
+  </select>
+
 </mapper>
