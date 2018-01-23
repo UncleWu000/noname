@@ -4,7 +4,6 @@ import com.github.pagehelper.Page;
 import com.noname.annotation.Pagination;
 import com.noname.entity.Article;
 import com.noname.mapper.ArticleMapper;
-import com.noname.mapper.ArticleMapper2;
 import com.noname.vo.ArticleVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +23,7 @@ public class ArticleController {
     @Autowired
     ArticleMapper articleMapper;
 
-    @Autowired
-    ArticleMapper2 articleMapper2;
+
 
 //    @Autowired
 //    ArticleService articleService;
@@ -38,6 +36,7 @@ public class ArticleController {
         System.out.println(id + "========================");
         return articleMapper.selectByPrimaryKey(id);
     }
+
 
 //    //读取文章列表
 //    @GetMapping("/list")
@@ -59,7 +58,7 @@ public class ArticleController {
     //读取文章列表
     @GetMapping("/list/{rule}")
     @Pagination
-    public Map<String, Object> getList2(@PathVariable(required = false, value = "rule")String rule){
+    public Map<String, Object> getList2(@PathVariable(required = false, value = "rule")String rule, @RequestParam(required = false)String title){
 
         Map<String, Object> map = new HashMap<>();
 
@@ -78,12 +77,18 @@ public class ArticleController {
         }else if(rule.equals("timeasc")){
             rule = "ORDER BY create_date ASC";
 
+        }else if(rule.equals("title")){
+            if(title == null){
+                map.put("error", "关键字不能为空");
+                return map;
+            }
+            rule = "WHERE title like \"%"+title+"%\"";
         }else{
             rule = "ORDER BY create_date DESC";
         }
 
-//        List<Article> ret = articleMapper.selectAllByRule(rule);
-        List<Article> ret = articleMapper2.selectAll();
+        List<Article> ret = articleMapper.selectAllByRule(rule);
+//        List<Article> ret = articleMapper.selectAll();
 
         Page<Article> page = (Page)ret;
         map.put("pageNum", page.getPageNum());
@@ -108,8 +113,14 @@ public class ArticleController {
 
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     public  int updateArticle(Article article){
+
+        return articleMapper.updateByPrimaryKeySelective(article);
+
+    }
+    @PostMapping("/add")
+    public  int addArticle(Article article){
 
         return articleMapper.updateByPrimaryKeySelective(article);
 
