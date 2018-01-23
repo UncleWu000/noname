@@ -17,7 +17,6 @@ public class Course {
 
     private Integer selectedMax;
 
-    @JsonIgnore
     private Integer selectedNow;
 
     private String courseType;

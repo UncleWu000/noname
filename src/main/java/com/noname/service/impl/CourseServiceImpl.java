@@ -6,6 +6,7 @@ import com.noname.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -18,11 +19,14 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     CourseMapper courseMapper;
 
-    @Override
-    @Cacheable("courseList")
-    public List<Course> getCourseList() {
+    @Autowired
+    RedisTemplate redisTemplate;
 
-        List<Course> courses = courseMapper.selectAll2();
+    @Override
+    @CachePut("courseList")
+    public List<Course> sysGetCourseList() {
+
+        List<Course> courses = courseMapper.selectAll();
         return courses;
     }
 
@@ -51,7 +55,23 @@ public class CourseServiceImpl implements CourseService {
     @CachePut(value = "courseNumber", key = "'course#'+#id")
     public Integer getCourseNumber(Integer id, Integer numMax, Integer numNow){
         Integer rs = numMax-numNow;
+        System.out.println("课程#"+id+"剩余可选"+" " + rs);
         return rs;
+    }
+
+    public  boolean stuSelectCourse(Integer stuId, Integer courseId){
+
+        try {
+            if(redisTemplate.opsForValue().increment("course#"+courseId, -1)>=0){
+                System.out.println("学生"+stuId+"抢课成功!!");
+                throw new Exception();
+//                return true;
+            }
+        } catch (Exception e) {
+            redisTemplate.opsForValue().increment("course#"+courseId, 1);
+            e.printStackTrace();
+        }
+        return false;
     }
 
 
