@@ -111,7 +111,7 @@ public class ArticleController {
     @PutMapping("/update")
     public  int updateArticle(Article article){
 
-        return articleMapper.updateByPrimaryKey(article);
+        return articleMapper.updateByPrimaryKeySelective(article);
 
     }
 
