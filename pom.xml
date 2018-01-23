@@ -76,7 +76,7 @@
     </dependencies>
 
     <build>
-        
+        <finalName>noname</finalName>
         <plugins>
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
