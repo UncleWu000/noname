@@ -6,6 +6,7 @@ import com.noname.mapper.AdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @RequestMapping("/manager")
@@ -16,7 +17,7 @@ public class ManagerController {
     @Autowired
     AdminMapper adminMapper;
 
-    @PostMapping("")
+    @PostMapping("/add")
     public int addAdmin(Admin admin){
         return adminMapper.insertSelective(admin);
     }
@@ -26,7 +27,7 @@ public class ManagerController {
         return adminMapper.deleteByPrimaryKey(id);
     }
 
-    @PutMapping("")
+    @PostMapping("/update")
     public int pwChange(Admin admin){
         return adminMapper.updateByPrimaryKey(admin);
     }

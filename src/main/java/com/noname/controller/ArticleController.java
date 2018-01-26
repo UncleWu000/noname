@@ -9,10 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RequestMapping("/article")
 @RestController
@@ -115,14 +112,13 @@ public class ArticleController {
 
     @PostMapping("/update")
     public  int updateArticle(Article article){
-
+        article.setCreateDate(new Date());
         return articleMapper.updateByPrimaryKeySelective(article);
-
     }
     @PostMapping("/add")
     public  int addArticle(Article article){
-
-        return articleMapper.updateByPrimaryKeySelective(article);
+        article.setCreateDate(new Date());
+        return articleMapper.insert(article);
 
     }
 

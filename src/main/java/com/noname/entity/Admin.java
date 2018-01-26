@@ -1,6 +1,14 @@
 package com.noname.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Table(name = "admin")
+@Entity
 public class Admin {
+    @Id
     private Integer id;
 
     private String username;

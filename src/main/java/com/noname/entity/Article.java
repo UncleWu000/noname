@@ -2,9 +2,15 @@ package com.noname.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
+@Table(name = "article")
+@Entity
 public class Article {
+    @Id
     private Integer id;
 
     private String type;
@@ -15,10 +21,11 @@ public class Article {
 
     private Integer likeCount;
 
-    @JsonIgnore
     private Date createDate;
 
     private String main;
+
+
 
     public Integer getId() {
         return id;

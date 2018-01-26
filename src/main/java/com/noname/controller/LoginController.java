@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -17,14 +19,20 @@ public class LoginController {
     AdminMapper adminMapper;
 
     @RequestMapping("/login")
-    public String login(Admin admin) throws Exception{
+    public Map<String, Object> login(Admin admin) throws Exception{
 
         List<Admin> adminList = adminMapper.select(admin);
+        Map<String, Object> map = new HashMap<>();
         if(adminList.size()>0){
             admin = adminList.get(0);
-            return EncrypUtils.encryp(admin.getUsername(), admin.getPassword());
+            String token = EncrypUtils.encryp(admin.getUsername(), admin.getPassword());
+            map.put("status",  true);
+            map.put("token", token);
+            return map;
         }else{
-            return "账号或密码错误!";
+            map.put("status",  false);
+            map.put("token", "null");
+            return map;
         }
     }
 
