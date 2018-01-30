@@ -32,7 +32,7 @@ spring:
 
 mybatis:
     type-aliases-package: com.noname.entity
-    mapper-locations: classpath:mybatis/xml/*.xml
+    mapper-locations: classpath:com/noname/mapper/xml/*.xml
 
 ## 如果自定义一个mapper继承tk的mapper (mapper和@mapper冲突问题) 则需要配置
 mapper:

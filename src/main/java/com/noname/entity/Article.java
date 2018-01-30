@@ -1,7 +1,5 @@
 package com.noname.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.Id;
 import java.util.Date;
 
@@ -18,7 +16,6 @@ public class Article {
 
     private Integer likeCount;
 
-    @JsonIgnore
     private Date createDate;
 
     private String main;

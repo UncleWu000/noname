@@ -63,7 +63,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     public CacheManager cacheManager (@SuppressWarnings("rawtypes")RedisTemplate redisTemplate){
         RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
         Map<String, Long> expiredTimeMap = new HashMap<>();
-        expiredTimeMap.put("userlist", 3600L);
+        expiredTimeMap.put("articlelist", 10L);
         //设置缓存过期时间
         //cacheManager.setDefaultExpiration(10000);
         cacheManager.setExpires(expiredTimeMap);

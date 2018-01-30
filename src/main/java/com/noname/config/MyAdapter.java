@@ -1,7 +1,6 @@
 package com.noname.config;
 
 import com.noname.interceptor.CORSInterceptor;
-import com.noname.interceptor.PaginationInterceptor;
 import com.noname.interceptor.RequestInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -13,7 +12,7 @@ public class MyAdapter extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new RequestInterceptor()).addPathPatterns("/**");
         registry.addInterceptor(new CORSInterceptor()).addPathPatterns("/**");
-        registry.addInterceptor(new PaginationInterceptor()).addPathPatterns("/**");
+//        registry.addInterceptor(new PaginationInterceptor()).addPathPatterns("/**");
         super.addInterceptors(registry);
     }
 }

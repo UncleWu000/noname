@@ -4,13 +4,10 @@ import com.github.pagehelper.Page;
 import com.noname.annotation.Pagination;
 import com.noname.entity.Article;
 import com.noname.mapper.ArticleMapper;
-import com.noname.vo.ArticleVO;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +24,14 @@ public class ArticleController {
 
 //    @Autowired
 //    ArticleService articleService;
+
+
+    @GetMapping("/test/t")
+    public String test() throws Exception {
+        System.out.println("in test!!!");
+        throw new Exception("wakakakak");
+    }
+
 
 
     //根据ID读取
@@ -56,7 +61,7 @@ public class ArticleController {
 
     //读取文章列表
     @GetMapping("/list/{rule}")
-    @Pagination
+    @Pagination()
     @Cacheable("articlelist")
     public Map<String, Object> getList2(@PathVariable(required = false, value = "rule")String rule){
         System.out.println("获取文章列表...");
@@ -88,15 +93,15 @@ public class ArticleController {
         map.put("pageNum", page.getPageNum());
         map.put("pageSize", page.getPageSize());
         map.put("total", page.getTotal());
-        List<ArticleVO> avos = new ArrayList<>();
+//        List<ArticleVO> avos = new ArrayList<>();
+//
+//        for(Article item : ret){
+//            ArticleVO avo = new ArticleVO();
+//            BeanUtils.copyProperties(item, avo);
+//            avos.add(avo);
+//        }
 
-        for(Article item : ret){
-            ArticleVO avo = new ArticleVO();
-            BeanUtils.copyProperties(item, avo);
-            avos.add(avo);
-        }
-
-        map.put("data", avos);
+        map.put("data", page);
         return map;
     }
 

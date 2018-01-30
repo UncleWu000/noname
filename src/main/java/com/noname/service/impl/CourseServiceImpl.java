@@ -42,7 +42,7 @@ public class CourseServiceImpl implements CourseService {
         return map;
     }
 
-    @Cacheable("courseNumber")
+    @Cacheable(value = "courseNumber")
     public Map<String, Integer> stuetSelectedNow(){
         List<Course> courses = courseMapper.selectAll();
         Map<String, Integer> map = new HashMap<>();
