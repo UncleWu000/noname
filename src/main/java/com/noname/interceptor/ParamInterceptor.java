@@ -22,7 +22,7 @@ public class ParamInterceptor implements HandlerInterceptor {
 
         Enumeration<String> lists =  httpServletRequest.getParameterNames();
 
-        System.out.println(httpServletRequest.getMethod()+":");
+        System.out.println("MethodType:"+httpServletRequest.getMethod());
         System.out.println("param:{");
         while(lists.hasMoreElements()){
             String paramName = lists.nextElement();
