@@ -1,6 +1,5 @@
 package com.noname.controller;
 
-import com.noname.exception.DefaultExceptionResolver;
 import com.noname.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -14,7 +13,7 @@ import java.util.Map;
 
 @RequestMapping("user")
 @RestController
-public class AdminController extends DefaultExceptionResolver {
+public class AdminController {
 
     @Autowired
     UserMapper userMapper;

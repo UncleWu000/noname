@@ -3,6 +3,7 @@ package com.noname.controller;
 import com.github.pagehelper.Page;
 import com.noname.annotation.Pagination;
 import com.noname.entity.Article;
+import com.noname.exception.TestException;
 import com.noname.mapper.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -29,7 +30,7 @@ public class ArticleController {
     @GetMapping("/test/t")
     public String test() throws Exception {
         System.out.println("in test!!!");
-        throw new Exception("wakakakak");
+        throw new TestException("wakakakak");
     }
 
 

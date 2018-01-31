@@ -1,4 +1,4 @@
-package com.noname.config;
+package com.noname.adapter;
 
 import com.noname.interceptor.CORSInterceptor;
 import com.noname.interceptor.RequestInterceptor;

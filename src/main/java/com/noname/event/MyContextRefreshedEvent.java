@@ -1,4 +1,4 @@
-package com.noname.config;
+package com.noname.event;
 
 import com.noname.entity.Course;
 import com.noname.service.CourseService;
