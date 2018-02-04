@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class CourseServiceImpl implements CourseService {
+public class CourseServiceImpl extends BaseServiceImpl<CourseMapper, Course> implements CourseService {
 
     @Autowired
     CourseMapper courseMapper;
@@ -23,7 +23,7 @@ public class CourseServiceImpl implements CourseService {
     RedisTemplate redisTemplate;
 
     @Override
-    @CachePut("courseList")
+    //@CachePut("courseList")
     public List<Course> sysGetCourseList() {
 
         List<Course> courses = courseMapper.selectAll();
