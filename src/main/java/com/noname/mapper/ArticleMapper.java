@@ -1,14 +1,13 @@
 package com.noname.mapper;
 
 import com.noname.entity.Article;
+import com.noname.util.BaseMapper;
 import org.apache.ibatis.annotations.Param;
-import tk.mybatis.mapper.common.BaseMapper;
-import tk.mybatis.mapper.common.Mapper;
 
 
 import java.util.List;
 
-public interface ArticleMapper extends Mapper<Article> {
+public interface ArticleMapper extends BaseMapper<Article> {
 
     List<Article> selectAllByRule(@Param("rule")String rule);
 }

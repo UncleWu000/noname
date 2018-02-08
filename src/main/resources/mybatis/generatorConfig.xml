@@ -29,7 +29,7 @@
         </javaModelGenerator>
 
         <!-- targetProject:mapper映射xml文件生成的位置，重要！！ -->
-        <sqlMapGenerator targetPackage="mybatis.xml"
+        <sqlMapGenerator targetPackage="com.noname.mapper.xml"
                          targetProject=".\src\main\java">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
@@ -48,11 +48,32 @@
                 <!--enableSelectByExample="false"-->
                 <!--enableUpdateByExample="false"></table>-->
 
-        <table tableName="course"
+
+        <table tableName="classroom"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
-               enableUpdateByExample="false"></table>
+               enableUpdateByExample="false"
+               enableDeleteByPrimaryKey="false"
+        enableInsert="false"
+        enableUpdateByPrimaryKey="false"></table>
+        <table tableName="selected"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByPrimaryKey="false"
+               enableInsert="false"
+               enableUpdateByPrimaryKey="false"></table>
+        <table tableName="course_room_plan"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByPrimaryKey="false"
+               enableInsert="false"
+               enableUpdateByPrimaryKey="false"></table>
+
 
         <!--<table tableName="user"-->
                <!--enableCountByExample="false"-->

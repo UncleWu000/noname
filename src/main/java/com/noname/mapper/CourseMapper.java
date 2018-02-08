@@ -1,7 +1,7 @@
 package com.noname.mapper;
 
 import com.noname.entity.Course;
-import tk.mybatis.mapper.common.BaseMapper;
+import com.noname.util.BaseMapper;
 
 import java.util.List;
 
