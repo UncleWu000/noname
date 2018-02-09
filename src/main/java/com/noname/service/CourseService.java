@@ -11,4 +11,6 @@ public interface CourseService {
     Integer getCourseNumber(Integer id, Integer numMax, Integer numNow);
 
     boolean stuSelectCourse(Integer stuId, Integer courseId);
+
+
 }

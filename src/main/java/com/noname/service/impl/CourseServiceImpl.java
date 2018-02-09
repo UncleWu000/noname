@@ -23,7 +23,7 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseMapper, Course> imp
     RedisTemplate redisTemplate;
 
     @Override
-    //@CachePut("courseList")
+    @Cacheable("courseList")
     public List<Course> sysGetCourseList() {
 
         List<Course> courses = courseMapper.selectAll();
@@ -53,6 +53,7 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseMapper, Course> imp
     }
 
     @CachePut(value = "courseNumber", key = "'course#'+#id")
+//    @CacheEvict(value = "courseNumber", key = "'course#'+#id", allEntries = true)
     public Integer getCourseNumber(Integer id, Integer numMax, Integer numNow){
         Integer rs = numMax-numNow;
         System.out.println("课程#"+id+"剩余可选"+" " + rs);

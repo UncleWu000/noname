@@ -1,5 +1,5 @@
-#server:
-#  port: 8081
+server:
+  port: 8080
 #  context-path: /cs
 
 # datasource
@@ -16,17 +16,15 @@ spring:
             allow: true
           max-active: 10
           min-idle: 1
-    mvc:
-      view:
-        prefix:
+
     redis:
-      host: 119.28.108.118
+      host: 192.168.144.129
       port: 6379
       timeout: 10000
       pool:
-        max-idle: 500
-        max-wait: 1000
-      password: redis@123
+        max-idle: 200
+        max-wait: 2000
+#      password: redis@123
     cache:
       type: redis
 

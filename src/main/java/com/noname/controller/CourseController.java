@@ -4,8 +4,10 @@ import com.noname.bo.Result;
 import com.noname.entity.Course;
 import com.noname.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +29,11 @@ public class CourseController {
     public List<Course> getCourseList(){
 
         List<Course> courses = new ArrayList<>();
-        //courses = courseService.getCourseList();
+        courses = courseService.sysGetCourseList();
         return courses;
     }
 
     @GetMapping("/test")
-//    @Cacheable(value = "testNum")
     public String test(){
         courseService.getCourseNumber(1,10,1);
         return "success";
