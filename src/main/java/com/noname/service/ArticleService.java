@@ -1,4 +1,6 @@
 package com.noname.service;
 
-public interface ArticleService {
+import com.noname.entity.Article;
+
+public interface ArticleService extends BaseService<Article> {
 }
