@@ -4,7 +4,7 @@ import com.noname.entity.Course;
 
 import java.util.List;
 
-public interface CourseService {
+public interface CourseService extends BaseService<Course>{
 
     List<Course> sysGetCourseList();
 

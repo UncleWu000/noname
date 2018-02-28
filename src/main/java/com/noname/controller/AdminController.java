@@ -2,10 +2,12 @@ package com.noname.controller;
 
 import com.noname.bo.DataResult;
 import com.noname.bo.Result;
-import com.noname.entity.Article;
+import com.noname.entity.Classroom;
+import com.noname.entity.Course;
 import com.noname.entity.User;
-import com.noname.mapper.UserMapper;
-import com.noname.service.ArticleService;
+import com.noname.service.ClassroomService;
+import com.noname.service.CourseService;
+import com.noname.service.UserService;
 import com.noname.util.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,17 +22,20 @@ import java.util.stream.Collectors;
 public class AdminController {
 
     @Autowired
-    UserMapper userMapper;
+    UserService userService;
 
     @Autowired
-    ArticleService articleService;
+    CourseService courseService;
+
+    @Autowired
+    ClassroomService classroomService;
 
     @GetMapping("/userList")
     public Result getUserList(Integer id){
         DataResult<List<User>> rs = new DataResult<>();
 
         try {
-            List<User> userList = userMapper.selectAll();
+            List<User> userList = userService.selectAll();
             if(id!=null){
                 userList = userList.stream().filter(s->s.getId().equals(id)).collect(Collectors.toList());
             }
@@ -49,9 +54,9 @@ public class AdminController {
 
         try {
             if(user.getId()!=null){
-                userMapper.updateByPrimaryKeySelective(user);
+                userService.updateByPrimaryKeySelective(user);
             }else{
-                userMapper.insertSelective(user);
+                userService.insertSelective(user);
             }
         } catch (Exception e) {
             rs.setExceptionStatus(e.getMessage());
@@ -68,7 +73,7 @@ public class AdminController {
         String fail = "";
 
         for(Integer id : ids){
-            if(userMapper.deleteByPrimaryKey(id)==0){
+            if(userService.deleteByPrimaryKey(id)==0){
                 fail += fail.equals("")?"":", ";
                 fail += id;
             };
@@ -79,28 +84,24 @@ public class AdminController {
 
     @PostMapping("/userImport")
     public Result importUser(MultipartFile file){
+        DataResult<String> rs = new DataResult<>();
         List<ArrayList<String>> userExcel = ExcelUtil.excelRead(file);
-
-        for(ArrayList<String> row : userExcel){
-
-            for(String cell : row){
-
-            }
-        }
-        return null;
+        String res = userService.userImport(userExcel);
+        rs.setData(res);
+        return rs;
     }
 
 
-    @GetMapping("/articleList")
-    public Result getArticleList(Integer id){
-        DataResult<List<Article>> rs = new DataResult<>();
+    @GetMapping("/courseList")
+    public Result getCourseList(Integer id){
+        DataResult<List<Course>> rs = new DataResult<>();
 
         try {
-            List<Article> articleList = articleService.selectAll();
+            List<Course> courseList = courseService.selectAll();
             if(id!=null){
-                articleList = articleList.stream().filter(s->s.getId().equals(id)).collect(Collectors.toList());
+                courseList = courseList.stream().filter(s->s.getId().equals(id)).collect(Collectors.toList());
             }
-            rs.setData(articleList);
+            rs.setData(courseList);
         } catch (Exception e) {
             rs.setExceptionStatus(e.getMessage());
             e.printStackTrace();
@@ -109,14 +110,14 @@ public class AdminController {
         return rs;
     }
 
-    @PostMapping("/article")
-    public Result createOrUpdateArticle(Article article){
+    @PostMapping("/course")
+    public Result createOrUpdateCourse(Course course){
         Result rs = new Result();
         try {
-            if(article.getId()!=null){
-                articleService.updateByPrimaryKeySelective(article);
+            if(course.getId()!=null){
+                courseService.updateByPrimaryKeySelective(course);
             }else{
-                articleService.insertSelective(article);
+                courseService.insertSelective(course);
             }
         } catch (Exception e) {
             rs.setExceptionStatus(e.getMessage());
@@ -125,13 +126,13 @@ public class AdminController {
         return rs;
     }
 
-    @DeleteMapping("/article")
-    public Result deleteArticle(Integer[] ids){
+    @DeleteMapping("/course")
+    public Result deleteCourse(Integer[] ids){
         Result rs = new Result();
 
         String fail = "";
         for(Integer id : ids){
-            if(articleService.deleteByPrimaryKey(id) == 0){
+            if(courseService.deleteByPrimaryKey(id) == 0){
                 fail += fail.equals("")?"":", ";
                 fail += id;
             }
@@ -140,8 +141,8 @@ public class AdminController {
         return rs;
     }
 
-    @PostMapping("/articleImport")
-    public Result importArticle(MultipartFile file){
+    @PostMapping("/courseImport")
+    public Result importCourse(MultipartFile file){
         List<ArrayList<String>> userExcel = ExcelUtil.excelRead(file);
 
         for(ArrayList<String> row : userExcel){
@@ -153,6 +154,44 @@ public class AdminController {
         return null;
     }
 
+    @GetMapping("/classroom")
+    public Result getClassroomList(Integer id){
+        DataResult<List<Classroom>> rs = new DataResult<>();
+
+        try {
+            List<Classroom> classroomList = classroomService.selectAll();
+            if(id!=null){
+                classroomList = classroomList.stream().filter(s->s.getId().equals(id)).collect(Collectors.toList());
+            }
+            rs.setData(classroomList);
+        } catch (Exception e) {
+            rs.setExceptionStatus(e.getMessage());
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    @PostMapping("/classroom")
+    public Result createOrUpdateClassroom(Classroom classroom){
+        Result rs = new Result();
+
+        try {
+            if(classroom.getId()!=null){
+                classroomService.updateByPrimaryKeySelective(classroom);
+            }else{
+                classroomService.insertSelective(classroom);
+            }
+        } catch (Exception e) {
+            rs.setExceptionStatus(e.getMessage());
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+//    public Result deleteClassroom(Integer id){
+//        Result rs = new Result();
+//
+//    }
 
 
 }
