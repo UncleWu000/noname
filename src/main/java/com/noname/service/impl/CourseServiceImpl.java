@@ -23,7 +23,7 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseMapper, Course> imp
     RedisTemplate redisTemplate;
 
     @Override
-    @Cacheable("courseList")
+    //@Cacheable("courseList")
     public List<Course> sysGetCourseList() {
 
         List<Course> courses = courseMapper.selectAll();

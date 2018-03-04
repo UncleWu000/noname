@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : Local
-Source Server Version : 50558
+Source Server         : MySQL
+Source Server Version : 50556
 Source Host           : localhost:3306
 Source Database       : noname
 
 Target Server Type    : MYSQL
-Target Server Version : 50558
+Target Server Version : 50556
 File Encoding         : 65001
 
-Date: 2018-01-19 15:06:51
+Date: 2018-03-05 02:27:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,18 +26,18 @@ CREATE TABLE `article` (
   `view_count` int(255) DEFAULT NULL COMMENT '浏览次数',
   `like_count` int(255) DEFAULT NULL COMMENT '点赞次数',
   `create_date` datetime DEFAULT NULL COMMENT '发布时间',
-  `main` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '信息主体',
+  `main` mediumtext CHARACTER SET utf8 COMMENT '信息主体',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of article
 -- ----------------------------
-INSERT INTO `article` VALUES ('1', '1', 'sss', '11111', '233', '2017-12-29 00:38:22', 'sssss');
-INSERT INTO `article` VALUES ('2', null, null, null, null, null, null);
+INSERT INTO `article` VALUES ('1', '1', '你好呀', '11111', '233', '2017-12-29 00:38:22', 'sssss');
+INSERT INTO `article` VALUES ('2', null, '你好呀', null, null, null, null);
 INSERT INTO `article` VALUES ('3', null, null, null, null, null, null);
-INSERT INTO `article` VALUES ('4', null, null, null, null, null, null);
-INSERT INTO `article` VALUES ('5', null, null, null, null, null, null);
+INSERT INTO `article` VALUES ('4', null, '吱吱吱吱吱吱吱吱吱吱吱吱吱吱吱吱吱吱吱', null, null, null, null);
+INSERT INTO `article` VALUES ('5', null, null, null, null, '2018-01-26 14:44:08', '吱吱吱吱吱吱吱');
 INSERT INTO `article` VALUES ('6', null, null, null, null, null, null);
 INSERT INTO `article` VALUES ('7', null, null, null, null, null, null);
 INSERT INTO `article` VALUES ('8', null, null, null, null, null, null);
@@ -49,6 +49,21 @@ INSERT INTO `article` VALUES ('14', null, null, null, null, null, null);
 INSERT INTO `article` VALUES ('15', null, null, null, null, null, null);
 INSERT INTO `article` VALUES ('16', null, null, null, null, null, null);
 INSERT INTO `article` VALUES ('17', null, null, null, null, null, null);
+
+-- ----------------------------
+-- Table structure for classroom
+-- ----------------------------
+DROP TABLE IF EXISTS `classroom`;
+CREATE TABLE `classroom` (
+  `id` int(11) NOT NULL,
+  `building` varchar(255) DEFAULT NULL,
+  `room_num` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of classroom
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for course
@@ -68,10 +83,25 @@ CREATE TABLE `course` (
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES ('1', '青春期性生理健康', '99', '宋桂冬', '118', '1', 'Hentai书籍');
+INSERT INTO `course` VALUES ('1', '青春期性生理健康', '99', '宋桂冬', '118', '2', 'Hentai书籍');
 INSERT INTO `course` VALUES ('2', '房中要术', '99', '宋桂冬', '120', '1', 'Hentai书籍');
 INSERT INTO `course` VALUES ('3', '读者', '99', '卓钟侄', '120', '1', '文化毒物');
 INSERT INTO `course` VALUES ('4', '公残党复兴', '99', '卓钟侄', '120', '1', '政治启蒙毒物');
+
+-- ----------------------------
+-- Table structure for course_room_plan
+-- ----------------------------
+DROP TABLE IF EXISTS `course_room_plan`;
+CREATE TABLE `course_room_plan` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) DEFAULT NULL,
+  `room_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of course_room_plan
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for manager
@@ -88,6 +118,24 @@ CREATE TABLE `manager` (
 -- Records of manager
 -- ----------------------------
 INSERT INTO `manager` VALUES ('1', 'admin', 'admin');
+INSERT INTO `manager` VALUES ('2', 'zzz', 'zzz');
+INSERT INTO `manager` VALUES ('3', 'zzz', 'zzz');
+
+-- ----------------------------
+-- Table structure for selected
+-- ----------------------------
+DROP TABLE IF EXISTS `selected`;
+CREATE TABLE `selected` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_name` varchar(255) DEFAULT NULL,
+  `score` int(11) DEFAULT '2',
+  `teacher` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of selected
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for u_permission

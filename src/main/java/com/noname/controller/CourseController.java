@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/course")
 @RestController
@@ -26,11 +28,15 @@ public class CourseController {
 
 
     @GetMapping("/courseList")
-    public List<Course> getCourseList(){
-
+    public Map<Object,Object> getCourseList(){
+        Map<Object,Object> rs = new HashMap<>();
         List<Course> courses = new ArrayList<>();
         courses = courseService.sysGetCourseList();
-        return courses;
+        rs.put("code", 0);
+        rs.put("msg", "");
+        rs.put("count", courses.size());
+        rs.put("data", courses);
+        return rs;
     }
 
     @GetMapping("/test")
