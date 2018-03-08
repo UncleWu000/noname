@@ -42,17 +42,78 @@
         </javaClientGenerator>
 
         <!-- 指定数据库表，要生成哪些表，就写哪些表，要和数据库中对应，不能写错！ -->
-        <table tableName="article"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-                enableSelectByExample="false"
-                enableUpdateByExample="false"></table>
+        <!--<table tableName="article"-->
+               <!--enableCountByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+                <!--enableSelectByExample="false"-->
+                <!--enableUpdateByExample="false"></table>-->
 
-        <table tableName="admin"
+
+        <table tableName="classroom"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
-               enableUpdateByExample="false"></table>
+               enableUpdateByExample="false"
+               enableDeleteByPrimaryKey="false"
+        enableInsert="false"
+        enableUpdateByPrimaryKey="false"></table>
+        <table tableName="selected"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByPrimaryKey="false"
+               enableInsert="false"
+               enableUpdateByPrimaryKey="false"></table>
+        <table tableName="course_room_plan"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByPrimaryKey="false"
+               enableInsert="false"
+               enableUpdateByPrimaryKey="false"></table>
+
+
+        <!--<table tableName="user"-->
+               <!--enableCountByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--&lt;!&ndash;<columnRenamingRule searchString="^.*_\B" replaceString="" />&ndash;&gt;-->
+        <!--</table>-->
+
+        <!--<table tableName="role"-->
+               <!--enableCountByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--&lt;!&ndash;<columnRenamingRule searchString="^.*_\B" replaceString="" />&ndash;&gt;-->
+        <!--</table>-->
+
+        <!--<table tableName="permission"-->
+               <!--enableCountByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--&lt;!&ndash;<columnRenamingRule searchString="^.*_\B" replaceString="" />&ndash;&gt;-->
+        <!--</table>-->
+
+        <!--<table tableName="role_permission"-->
+               <!--enableCountByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--&lt;!&ndash;<columnRenamingRule searchString="^.*_\B" replaceString="" />&ndash;&gt;-->
+        <!--</table>-->
+
+        <!--<table tableName="user_role"-->
+               <!--enableCountByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--&lt;!&ndash;<columnRenamingRule searchString="^.*_\B" replaceString="" />&ndash;&gt;-->
+        <!--</table>-->
 
 
 

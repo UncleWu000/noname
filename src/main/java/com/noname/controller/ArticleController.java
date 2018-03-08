@@ -3,13 +3,15 @@ package com.noname.controller;
 import com.github.pagehelper.Page;
 import com.noname.annotation.Pagination;
 import com.noname.entity.Article;
+import com.noname.exception.TestException;
 import com.noname.mapper.ArticleMapper;
-import com.noname.vo.ArticleVO;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/article")
 @RestController
@@ -21,9 +23,16 @@ public class ArticleController {
     ArticleMapper articleMapper;
 
 
-
 //    @Autowired
 //    ArticleService articleService;
+
+
+    @GetMapping("/test/t")
+    public String test() throws Exception {
+        System.out.println("in test!!!");
+        throw new TestException("wakakakak");
+    }
+
 
 
     //根据ID读取
@@ -33,7 +42,6 @@ public class ArticleController {
         System.out.println(id + "========================");
         return articleMapper.selectByPrimaryKey(id);
     }
-
 
 //    //读取文章列表
 //    @GetMapping("/list")
@@ -54,9 +62,10 @@ public class ArticleController {
 
     //读取文章列表
     @GetMapping("/list/{rule}")
-    @Pagination
-    public Map<String, Object> getList2(@PathVariable(required = false, value = "rule")String rule, @RequestParam(required = false)String title){
-
+    @Pagination()
+    @Cacheable("articlelist")
+    public Map<String, Object> getList2(@PathVariable(required = false, value = "rule")String rule){
+        System.out.println("获取文章列表...");
         Map<String, Object> map = new HashMap<>();
 
         if(rule.equals("likeasc")){
@@ -74,33 +83,26 @@ public class ArticleController {
         }else if(rule.equals("timeasc")){
             rule = "ORDER BY create_date ASC";
 
-        }else if(rule.equals("title")){
-            if(title == null){
-                map.put("error", "关键字不能为空");
-                return map;
-            }
-            rule = "WHERE title like \"%"+title+"%\"";
         }else{
             rule = "ORDER BY create_date DESC";
         }
 
-        List<Article> ret = articleMapper.selectAllByRule(rule);
-//        List<Article> ret = articleMapper.selectAll();
+//        List<Article> ret = articleMapper.selectAllByRule(rule);
+        List<Article> ret = articleMapper.selectAll();
 
         Page<Article> page = (Page)ret;
         map.put("pageNum", page.getPageNum());
         map.put("pageSize", page.getPageSize());
         map.put("total", page.getTotal());
-        List<ArticleVO> avos = new ArrayList<>();
+//        List<ArticleVO> avos = new ArrayList<>();
+//
+//        for(Article item : ret){
+//            ArticleVO avo = new ArticleVO();
+//            BeanUtils.copyProperties(item, avo);
+//            avos.add(avo);
+//        }
 
-        for(Article item : ret){
-            ArticleVO avo = new ArticleVO();
-            BeanUtils.copyProperties(item, avo);
-            avos.add(avo);
-        }
-
-        map.put("data", avos);
-
+        map.put("data", page);
         return map;
     }
 
@@ -110,18 +112,12 @@ public class ArticleController {
 
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     public  int updateArticle(Article article){
-        article.setCreateDate(new Date());
-        return articleMapper.updateByPrimaryKeySelective(article);
-    }
-    @PostMapping("/add")
-    public  int addArticle(Article article){
-        article.setCreateDate(new Date());
-        return articleMapper.insert(article);
+
+        return articleMapper.updateByPrimaryKey(article);
 
     }
-
 
 
 

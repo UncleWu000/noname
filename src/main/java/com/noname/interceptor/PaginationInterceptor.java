@@ -16,9 +16,10 @@ public class PaginationInterceptor implements HandlerInterceptor{
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
 
         if(isPagination(o)){
-            System.out.println("======================================================================= paging");
+            System.out.println("==================================== paging ====================================");
             PageHelper.startPage(getPageNum(httpServletRequest), getPageSize(httpServletRequest));
         }
+        System.out.println("pagination param: pageNum:"+getPageNum(httpServletRequest)+ ", pageSize:"+getPageSize(httpServletRequest));
         return true;
     }
 

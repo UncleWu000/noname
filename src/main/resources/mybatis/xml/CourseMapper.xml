@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.noname.mapper.CourseMapper" >
+  <resultMap id="BaseResultMap" type="com.noname.entity.Course" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="course_name" property="courseName" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="teacher" property="teacher" jdbcType="VARCHAR" />
+    <result column="selected_max" property="selectedMax" jdbcType="INTEGER" />
+    <result column="selected_now" property="selectedNow" jdbcType="INTEGER" />
+    <result column="course_type" property="courseType" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectAll2" resultMap="BaseResultMap">
+    SELECT * FROM course;
+  </select>
+
+</mapper>
