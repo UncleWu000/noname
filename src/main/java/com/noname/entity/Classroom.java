@@ -7,6 +7,16 @@ public class Classroom {
 
     private String roomNum;
 
+    private Integer used;
+
+    public Integer getUsed() {
+        return used;
+    }
+
+    public void setUsed(Integer used) {
+        this.used = used;
+    }
+
     public Integer getId() {
         return id;
     }

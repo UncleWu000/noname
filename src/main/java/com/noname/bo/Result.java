@@ -31,6 +31,11 @@ public class Result {
         this.msg = msg;
     }
 
+    public Result(String msg){
+        this();
+        this.msg = msg;
+    }
+
     public String getStatus() {
         return status;
     }

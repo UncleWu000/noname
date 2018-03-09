@@ -4,8 +4,11 @@ import com.noname.bo.DataResult;
 import com.noname.bo.Result;
 import com.noname.entity.Classroom;
 import com.noname.entity.Course;
+import com.noname.entity.CourseRoomPlan;
 import com.noname.entity.User;
+import com.noname.exception.ServiceException;
 import com.noname.service.ClassroomService;
+import com.noname.service.CourseRoomPlanService;
 import com.noname.service.CourseService;
 import com.noname.service.UserService;
 import com.noname.util.ExcelUtil;
@@ -29,6 +32,9 @@ public class AdminController {
 
     @Autowired
     ClassroomService classroomService;
+
+    @Autowired
+    CourseRoomPlanService courseRoomPlanService;
 
     @GetMapping("/userList")
     public Result getUserList(Integer id){
@@ -155,13 +161,16 @@ public class AdminController {
     }
 
     @GetMapping("/classroom")
-    public Result getClassroomList(Integer id){
+    public Result getClassroomList(Integer id, @RequestParam(value = "false") boolean used){
         DataResult<List<Classroom>> rs = new DataResult<>();
 
         try {
             List<Classroom> classroomList = classroomService.selectAll();
             if(id!=null){
                 classroomList = classroomList.stream().filter(s->s.getId().equals(id)).collect(Collectors.toList());
+            }
+            if(used){
+               classroomList = classroomList.stream().filter(s->s.getUsed().equals(0)).collect(Collectors.toList());
             }
             rs.setData(classroomList);
         } catch (Exception e) {
@@ -188,10 +197,53 @@ public class AdminController {
         return rs;
     }
 
-//    public Result deleteClassroom(Integer id){
-//        Result rs = new Result();
-//
-//    }
+    @DeleteMapping("classroom")
+    public Result deleteClassroom(Integer id){
+        Result rs = new Result();
+
+        if(!(classroomService.deleteByPrimaryKey(id)==0)){
+            rs.setMsg("删除失败，不存在该记录");
+
+        }
+        return rs;
+    }
+
+    @GetMapping("/crplan")
+    public Result getPlan(){
+        DataResult<List<CourseRoomPlan>> rs = new DataResult<>();
+
+        List<CourseRoomPlan> courseRoomPlans = courseRoomPlanService.selectAll();
+        rs.setData(courseRoomPlans);
+        return rs;
+    }
+
+    @PostMapping("/crplan")
+    public Result createOrUpdate(CourseRoomPlan courseRoomPlan) throws ServiceException {
+
+        Integer roomId = courseRoomPlan.getRoomId();
+        Classroom courseRoomPlan1 = classroomService.selectByPrimaryKey(roomId);
+        if(courseRoomPlan1!=null && courseRoomPlan1.getUsed()==1){
+            throw new ServiceException("该教室已被占用");
+        }
+
+        if(courseRoomPlan.getId()==null){
+            courseRoomPlanService.insertSelective(courseRoomPlan);
+        }else{
+            courseRoomPlanService.updateByPrimaryKeySelective(courseRoomPlan);
+        }
+        return new Result();
+    }
+
+    @DeleteMapping("/crplan")
+    public Result deletePlan(Integer id){
+        if(courseRoomPlanService.deleteByPrimaryKey(id) == 0){
+            return new Result("不存在相应记录");
+        }else {
+            return new Result();
+        }
+    }
+
+
 
 
 }
