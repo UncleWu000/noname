@@ -1,7 +1,9 @@
 package com.noname.service.impl;
 
 import com.noname.entity.Course;
+import com.noname.entity.Selected;
 import com.noname.mapper.CourseMapper;
+import com.noname.mapper.SelectedMapper;
 import com.noname.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
@@ -16,24 +18,29 @@ import java.util.Map;
 @Service
 public class CourseServiceImpl extends BaseServiceImpl<CourseMapper, Course> implements CourseService {
 
-    @Autowired
-    CourseMapper courseMapper;
+
 
     @Autowired
     RedisTemplate redisTemplate;
+
+    @Autowired
+    SelectedMapper selectedMapper;
+
+    @Autowired
+    CourseMapper courseMapper;
 
     @Override
     //@Cacheable("courseList")
     public List<Course> sysGetCourseList() {
 
-        List<Course> courses = courseMapper.selectAll();
+        List<Course> courses = dao.selectAll();
         return courses;
     }
 
 
     @CachePut("courseNumber")
     public Map<String, Integer> sysGetSelectedNow(){
-        List<Course> courses = courseMapper.selectAll();
+        List<Course> courses = dao.selectAll();
         Map<String, Integer> map = new HashMap<>();
         courses.forEach(s->{
             map.put(s.getCourseName(), s.getSelectedNow());
@@ -44,7 +51,7 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseMapper, Course> imp
 
     @Cacheable(value = "courseNumber")
     public Map<String, Integer> stuetSelectedNow(){
-        List<Course> courses = courseMapper.selectAll();
+        List<Course> courses = dao.selectAll();
         Map<String, Integer> map = new HashMap<>();
         courses.forEach(s->{
             map.put(s.getCourseName(), s.getSelectedNow());
@@ -64,9 +71,19 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseMapper, Course> imp
 
         try {
             if(redisTemplate.opsForValue().increment("course#"+courseId, -1)>=0){
+                Course c = courseMapper.selectByPrimaryKey(courseId);
+                Selected s = new Selected();
+                s.setStuId(stuId);
+                List<Selected> selecteds = selectedMapper.select(s);
+                if(selecteds!=null && selecteds.size()>2){
+                    throw new Exception("选课不能超过2门");
+                }
+                s.setCourseName(c.getCourseName());
+                s.setTeacher(c.getTeacher());
+                s.setScore(c.getScore());
+                selectedMapper.insert(s);
                 System.out.println("学生"+stuId+"抢课成功!!");
-                throw new Exception();
-//                return true;
+                return true;
             }
         } catch (Exception e) {
             redisTemplate.opsForValue().increment("course#"+courseId, 1);

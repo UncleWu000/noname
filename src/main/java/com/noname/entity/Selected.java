@@ -9,6 +9,16 @@ public class Selected {
 
     private String teacher;
 
+    private Integer stuId;
+
+    public Integer getStuId() {
+        return stuId;
+    }
+
+    public void setStuId(Integer stuId) {
+        this.stuId = stuId;
+    }
+
     public Integer getId() {
         return id;
     }
