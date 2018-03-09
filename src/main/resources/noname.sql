@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : MySQL
-Source Server Version : 50556
+Source Server         : Local
+Source Server Version : 50558
 Source Host           : localhost:3306
 Source Database       : noname
 
 Target Server Type    : MYSQL
-Target Server Version : 50556
+Target Server Version : 50558
 File Encoding         : 65001
 
-Date: 2018-03-05 02:27:03
+Date: 2018-03-09 18:08:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,6 +58,7 @@ CREATE TABLE `classroom` (
   `id` int(11) NOT NULL,
   `building` varchar(255) DEFAULT NULL,
   `room_num` varchar(255) DEFAULT NULL,
+  `used` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -130,6 +131,7 @@ CREATE TABLE `selected` (
   `course_name` varchar(255) DEFAULT NULL,
   `score` int(11) DEFAULT '2',
   `teacher` varchar(255) DEFAULT NULL,
+  `stu_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

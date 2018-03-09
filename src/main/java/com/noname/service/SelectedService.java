@@ -1,4 +1,6 @@
 package com.noname.service;
 
-public interface SelectedService {
+import com.noname.entity.Selected;
+
+public interface SelectedService extends BaseService<Selected>{
 }
