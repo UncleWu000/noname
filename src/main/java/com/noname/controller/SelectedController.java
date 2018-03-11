@@ -6,16 +6,23 @@ import com.noname.entity.Selected;
 import com.noname.service.SelectedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController("/selected")
+@RestController
+@RequestMapping("/selected")
 public class SelectedController extends BaseController{
 
     @Autowired
     SelectedService selectedService;
+
+    @GetMapping("test")
+    public String text(){
+        return "success";
+    }
 
     @GetMapping("/list")
     public Result getStuSelected(){

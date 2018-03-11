@@ -2,15 +2,9 @@ package com.noname.controller;
 
 import com.noname.bo.DataResult;
 import com.noname.bo.Result;
-import com.noname.entity.Classroom;
-import com.noname.entity.Course;
-import com.noname.entity.CourseRoomPlan;
-import com.noname.entity.User;
+import com.noname.entity.*;
 import com.noname.exception.ServiceException;
-import com.noname.service.ClassroomService;
-import com.noname.service.CourseRoomPlanService;
-import com.noname.service.CourseService;
-import com.noname.service.UserService;
+import com.noname.service.*;
 import com.noname.util.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +29,9 @@ public class AdminController {
 
     @Autowired
     CourseRoomPlanService courseRoomPlanService;
+
+    @Autowired
+    StudentService studentService;
 
     @GetMapping("/userList")
     public Result getUserList(Integer id){
@@ -244,6 +241,13 @@ public class AdminController {
     }
 
 
+    @GetMapping("/student")
+    public Result getStudentList(Student student){
+
+        List<Student> students = studentService.selectAll();
+
+        return new DataResult<>(students);
+    }
 
 
 }

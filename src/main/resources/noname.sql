@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : Local
-Source Server Version : 50558
+Source Server         : MySQL
+Source Server Version : 50556
 Source Host           : localhost:3306
 Source Database       : noname
 
 Target Server Type    : MYSQL
-Target Server Version : 50558
+Target Server Version : 50556
 File Encoding         : 65001
 
-Date: 2018-03-09 18:08:01
+Date: 2018-03-11 21:55:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -133,11 +133,33 @@ CREATE TABLE `selected` (
   `teacher` varchar(255) DEFAULT NULL,
   `stu_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of selected
 -- ----------------------------
+INSERT INTO `selected` VALUES ('1', 'A', '2', 'AA', '1');
+INSERT INTO `selected` VALUES ('2', 'B', '2', 'BB', '1');
+INSERT INTO `selected` VALUES ('3', 'C', '2', 'CC', '1');
+
+-- ----------------------------
+-- Table structure for student
+-- ----------------------------
+DROP TABLE IF EXISTS `student`;
+CREATE TABLE `student` (
+  `id` int(11) NOT NULL,
+  `no` varchar(16) DEFAULT NULL,
+  `pwd` varchar(12) DEFAULT '1',
+  `sex` int(1) DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `clas` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of student
+-- ----------------------------
+INSERT INTO `student` VALUES ('1', '201424133100', '000000', '1', '王大锤', '弹道系统研究1班');
 
 -- ----------------------------
 -- Table structure for u_permission
