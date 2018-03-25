@@ -12,19 +12,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class PageAspect {
 
-    @Around("execution (* com.noname.mapper.*.*(..))")
-    public Object pageAspect(ProceedingJoinPoint joinPoint){
-        Object rs = null;
-        if(PageParam.getIsPage()){
-            PageHelper.startPage(PageParam.getPageNum(),PageParam.getPageSize());
-            try {
-                rs = joinPoint.proceed();
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-            }
-        }
-
-
-        return rs;
-    }
+//    @Around("execution (* com.noname.mapper.*.*(..))")
+//    public Object pageAspect(ProceedingJoinPoint joinPoint){
+//        Object rs = null;
+//        if(PageParam.getIsPage()){
+//            PageHelper.startPage(PageParam.getPageNum(),9999);
+//            try {
+//                rs = joinPoint.proceed();
+//            } catch (Throwable throwable) {
+//                throwable.printStackTrace();
+//            }
+//        }
+//
+//
+//        return rs;
+//    }
 }

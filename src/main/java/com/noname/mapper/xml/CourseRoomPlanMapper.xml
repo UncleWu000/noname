@@ -2,4 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.noname.mapper.CourseRoomPlanMapper" >
 
+
+    <select id="getAllPlanVo" resultType="com.noname.vo.PlanVO">
+        SELECT crp.id, cur.course_name courseName, concat(ifnull(r.building, ""),r.room_num) roomName
+        FROM course cur
+        LEFT JOIN course_room_plan crp ON crp.course_id = cur.id
+        LEFT JOIN classroom r ON  crp.room_id = r.id;
+    </select>
+
 </mapper>

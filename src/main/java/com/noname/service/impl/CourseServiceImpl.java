@@ -92,6 +92,10 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseMapper, Course> imp
         return false;
     }
 
+    @Override
+    public List<Course> selectAll2() {
+        return dao.selectAll2();
+    }
 
 
 }

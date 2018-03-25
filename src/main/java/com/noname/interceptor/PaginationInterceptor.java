@@ -60,7 +60,7 @@ public class PaginationInterceptor implements HandlerInterceptor{
         if((pageSize = request.getParameter("pageSize"))!=null && StrUtils.isNumber(pageSize)){
             return Integer.valueOf(pageSize);
         }else{
-            return 10;
+            return 9999;
         }
     }
 }

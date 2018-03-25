@@ -12,5 +12,7 @@ public interface CourseService extends BaseService<Course>{
 
     boolean stuSelectCourse(Integer stuId, Integer courseId);
 
+    List<Course> selectAll2();
+
 
 }

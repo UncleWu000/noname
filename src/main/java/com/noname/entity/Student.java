@@ -8,7 +8,7 @@ public class Student {
     private Integer id;
     private String  no;
     private String  pwd;
-    private Integer sex;
+    private String sex;
     private String  name;
     private String  clas;
 
@@ -36,11 +36,11 @@ public class Student {
         this.pwd = pwd;
     }
 
-    public Integer getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 

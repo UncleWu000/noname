@@ -6,10 +6,13 @@ import com.noname.entity.*;
 import com.noname.exception.ServiceException;
 import com.noname.service.*;
 import com.noname.util.ExcelUtil;
+import com.noname.vo.PlanVO;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.ws.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,6 +35,14 @@ public class AdminController {
 
     @Autowired
     StudentService studentService;
+
+
+    @Autowired
+    GroupService groupService;
+
+    @Autowired
+    ClassgroupService classgroupService;
+
 
     @GetMapping("/userList")
     public Result getUserList(Integer id){
@@ -100,7 +111,7 @@ public class AdminController {
         DataResult<List<Course>> rs = new DataResult<>();
 
         try {
-            List<Course> courseList = courseService.selectAll();
+            List<Course> courseList = courseService.selectAll2();
             if(id!=null){
                 courseList = courseList.stream().filter(s->s.getId().equals(id)).collect(Collectors.toList());
             }
@@ -130,8 +141,8 @@ public class AdminController {
     }
 
     @DeleteMapping("/course")
-    public Result deleteCourse(Integer[] ids){
-        Result rs = new Result();
+    public Result deleteCourse(@RequestParam(value = "ids[]") Integer[] ids){
+        DataResult rs = new DataResult<>();
 
         String fail = "";
         for(Integer id : ids){
@@ -140,7 +151,8 @@ public class AdminController {
                 fail += id;
             }
         }
-        System.out.println("fail : " +fail);
+        System.out.println("ID[" +fail+"]删除失败");
+        rs.setData(fail.equals("")?"删除成功":fail);
         return rs;
     }
 
@@ -158,7 +170,7 @@ public class AdminController {
     }
 
     @GetMapping("/classroom")
-    public Result getClassroomList(Integer id, @RequestParam(value = "false") boolean used){
+    public Result getClassroomList(Integer id, @RequestParam(defaultValue = "false") boolean used){
         DataResult<List<Classroom>> rs = new DataResult<>();
 
         try {
@@ -207,9 +219,9 @@ public class AdminController {
 
     @GetMapping("/crplan")
     public Result getPlan(){
-        DataResult<List<CourseRoomPlan>> rs = new DataResult<>();
+        DataResult<List<PlanVO>> rs = new DataResult<>();
 
-        List<CourseRoomPlan> courseRoomPlans = courseRoomPlanService.selectAll();
+        List<PlanVO> courseRoomPlans = courseRoomPlanService.getPlanVo();
         rs.setData(courseRoomPlans);
         return rs;
     }
@@ -249,5 +261,48 @@ public class AdminController {
         return new DataResult<>(students);
     }
 
+    @PostMapping("/student")
+    public Result createOrUpdataStu(Student student){
+
+        try {
+            if(student.getId() == null){
+                studentService.insertSelective(student);
+            }else{
+                studentService.updateByPrimaryKeySelective(student);
+            }
+        } catch (Exception e) {
+            return new Result(e.getMessage());
+        }
+        return new Result();
+    }
+
+
+    @DeleteMapping("/student")
+    public Result delStudent(@RequestParam(value = "ids[]")  Integer[]  ids){
+        String rs ="";
+        System.out.println(ids+"==================");
+        for(Integer id : ids){
+            if (studentService.deleteByPrimaryKey(id)==0) {
+                rs+=","+id;
+            }
+        }
+        if (rs.equals("")){
+            return new DataResult<>("删除成功");
+        }else{
+            return new DataResult<>("ID:["+rs.substring(1)+"]删除失败");
+        }
+    }
+
+
+    @GetMapping("group")
+    public Result getGroup(){
+        return new DataResult<>(groupService.selectAll());
+    }
+
+    @GetMapping("coursegroup")
+    public Result getClassgroup(){
+
+        return new DataResult<>(classgroupService.selectAll());
+    }
 
 }
