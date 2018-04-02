@@ -2,4 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.noname.mapper.SelectedMapper">
 
+    <select id="getCourseStuSelected" resultType="com.noname.vo.CourseStuSelectedVO">
+        SELECT se.*, st.no, st.sex, st.name stuName, st.clas
+        FROM selected se
+        LEFT JOIN student st ON se.stu_id = st.id
+        <where>
+            <if test="cname!=null">
+                se.course_name = #{cname}
+            </if>
+        </where>
+    </select>
+
 </mapper>

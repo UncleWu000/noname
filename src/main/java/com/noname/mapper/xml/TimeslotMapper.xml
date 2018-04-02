@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.noname.mapper.TimeslotMapper">
+
+
+    <select id="getUsefulTs" resultType="com.noname.entity.Timeslot">
+        SELECT id, time_slot timeSlot
+        FROM timeslot
+        WHERE id NOT IN (SELECT timeslot_id FROM course_room_plan WHERE room_id = #{roomId} AND timeslot_id!=0)
+    </select>
+</mapper>

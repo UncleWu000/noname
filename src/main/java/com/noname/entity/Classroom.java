@@ -1,6 +1,11 @@
 package com.noname.entity;
 
+import javax.persistence.Id;
+
 public class Classroom {
+
+
+    @Id
     private Integer id;
 
     private String building;

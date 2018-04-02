@@ -5,12 +5,17 @@ import com.noname.entity.Selected;
 import com.noname.mapper.CourseMapper;
 import com.noname.mapper.SelectedMapper;
 import com.noname.service.CourseService;
+import com.noname.util.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,6 +100,38 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseMapper, Course> imp
     @Override
     public List<Course> selectAll2() {
         return dao.selectAll2();
+    }
+
+    @Override
+    public boolean courseInport(MultipartFile file) throws IllegalAccessException {
+
+        List<ArrayList<String>> excel = ExcelUtil.excelRead(file);
+
+        Course course = new Course();
+        for(ArrayList<String> row : excel){
+
+            int index = 0;
+            for(String cell : row){
+                if(index == 0)
+                    course.setCourseName(cell);
+                else if(index == 1)
+                    course.setScore(Integer.valueOf(cell));
+                else if(index == 2)
+                    course.setTeacher(cell);
+                else if(index == 3)
+                    course.setSelectedMax(Integer.valueOf(cell));
+                else if(index == 4)
+                    course.setSelectedNow(Integer.valueOf(cell));
+                else if(index == 5)
+                    course.setCourseType(cell);
+
+                index ++;
+            }
+
+            dao.insertSelective(course);
+        }
+
+        return true;
     }
 
 

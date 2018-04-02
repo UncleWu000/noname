@@ -1,11 +1,24 @@
 package com.noname.entity;
 
+import javax.persistence.Id;
+
 public class CourseRoomPlan {
+    @Id
     private Integer id;
 
     private Integer courseId;
 
     private Integer roomId;
+
+    private Integer timeslotId;
+
+    public Integer getTimeslotId() {
+        return timeslotId;
+    }
+
+    public void setTimeslotId(Integer timeslotId) {
+        this.timeslotId = timeslotId;
+    }
 
     public Integer getId() {
         return id;

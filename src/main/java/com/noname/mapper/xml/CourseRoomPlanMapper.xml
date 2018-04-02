@@ -4,10 +4,11 @@
 
 
     <select id="getAllPlanVo" resultType="com.noname.vo.PlanVO">
-        SELECT crp.id, cur.course_name courseName, concat(ifnull(r.building, ""),r.room_num) roomName
+        SELECT cur.id, crp.room_id roomId, crp.timeslot_id timeslotId, t.time_slot timeslotStr, cur.course_name courseName, concat(r.building, "-",r.room_num) roomName
         FROM course cur
         LEFT JOIN course_room_plan crp ON crp.course_id = cur.id
-        LEFT JOIN classroom r ON  crp.room_id = r.id;
+        LEFT JOIN classroom r ON  crp.room_id = r.id
+        LEFT JOIN timeslot t ON t.id = crp.timeslot_id
     </select>
 
 </mapper>
