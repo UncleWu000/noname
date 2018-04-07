@@ -47,7 +47,7 @@ public class CourseController {
 
     @PostMapping("/selecting")
     public Result selecting(Integer stuId, Integer courseId){
-        if(courseService.stuSelectCourse(stuId, courseId)){
+        if(courseService.stuSelectCourse2(stuId, courseId)){
             return new Result();
         }
         return new Result(false);

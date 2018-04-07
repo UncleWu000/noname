@@ -19,7 +19,7 @@ spring:
           min-idle: 1
 
     redis:
-      host: 192.168.144.129
+      host: 119.29.242.249
       port: 6379
       timeout: 10000
       pool:

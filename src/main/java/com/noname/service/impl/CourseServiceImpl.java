@@ -7,14 +7,14 @@ import com.noname.mapper.SelectedMapper;
 import com.noname.service.CourseService;
 import com.noname.util.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,10 +35,11 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseMapper, Course> imp
     CourseMapper courseMapper;
 
     @Override
-    //@Cacheable("courseList")
+    @Cacheable("courseList")
     public List<Course> sysGetCourseList() {
 
         List<Course> courses = dao.selectAll();
+        System.out.println("get courseList");
         return courses;
     }
 
@@ -65,7 +66,7 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseMapper, Course> imp
     }
 
     @CachePut(value = "courseNumber", key = "'course#'+#id")
-//    @CacheEvict(value = "courseNumber", key = "'course#'+#id", allEntries = true)
+    @CacheEvict(value = "courseNumber", key = "'course#'+#id", allEntries = true)
     public Integer getCourseNumber(Integer id, Integer numMax, Integer numNow){
         Integer rs = numMax-numNow;
         System.out.println("课程#"+id+"剩余可选"+" " + rs);
@@ -95,6 +96,18 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseMapper, Course> imp
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public boolean  stuSelectCourse2(Integer stuId, Integer courseId){
+        synchronized (this){
+            Course course = courseMapper.selectByPrimaryKey(1);
+            course.setSelectedNow(course.getSelectedNow()+1);
+            System.out.println(courseMapper.updateByPrimaryKey(course));
+        }
+
+
+        return true;
     }
 
     @Override

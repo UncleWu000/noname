@@ -11,11 +11,12 @@ public interface CourseService extends BaseService<Course>{
 
     Integer getCourseNumber(Integer id, Integer numMax, Integer numNow);
 
-    boolean stuSelectCourse(Integer stuId, Integer courseId);
+//    boolean stuSelectCourse(Integer stuId, Integer courseId);
 
     List<Course> selectAll2();
 
     boolean courseInport(MultipartFile file) throws IllegalAccessException;
 
+    boolean stuSelectCourse2(Integer stuId, Integer courseId);
 
 }

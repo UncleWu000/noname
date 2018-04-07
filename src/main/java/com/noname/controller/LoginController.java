@@ -5,23 +5,36 @@ import com.noname.bo.Result;
 import com.noname.bo.user.CSSubject;
 import com.noname.bo.user.CSToken;
 import com.noname.constant.CSSubjectConst;
+import com.noname.entity.Student;
+import com.noname.entity.User;
+import com.noname.mapper.StudentMapper;
+import com.noname.mapper.UserMapper;
+import com.noname.service.StudentService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 
 @RestController
 public class LoginController {
 
+    @Autowired
+    StudentMapper studentMapper;
+    @Autowired
+    UserMapper userMapper;
 
     @RequestMapping("/myLogin")
     @ResponseBody
@@ -70,6 +83,29 @@ public class LoginController {
 
     private CSToken generateAdminToken(CSSubject csSubject) {
         return csSubject.toToken();
+    }
+
+
+    @GetMapping("login")
+    public Result login(String no, String pwd, Integer type){
+        if(type == 1){
+            Example example = new Example(Student.class);
+            example.createCriteria().andEqualTo("no", no).andEqualTo("pwd", pwd);
+            List<Student> students = studentMapper.selectByExample(example);
+            if(students!=null && students.size()==1){
+                System.out.println("["+no+"]登入系统");
+                return new Result();
+            }
+        }else{
+            Example example = new Example(User.class);
+            example.createCriteria().andEqualTo("nickname", no).andEqualTo("pswd", pwd);
+            List<User> users = userMapper.selectByExample(example);
+            if(users!=null && users.size() == 1){
+                System.out.println("管理员["+no+"]登入系统");
+                return new Result();
+            }
+        }
+        return new Result(false);
     }
 
 }

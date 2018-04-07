@@ -25,8 +25,8 @@ import java.util.Map;
  *z77z
  */
 
-//@Configuration
-//@EnableCaching
+@Configuration
+@EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
 
     @Value("${spring.redis.host}")
